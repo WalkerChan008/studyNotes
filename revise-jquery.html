@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+// 希望兼容ie6以前的版本，使用jQuery-1.8之前版本
+/* 实例方法 (定义在原型上) */
+// 选择元素
+  // (1) $()  里面可以写css选择器、原生dom(this)、jQuery对象、null/undefined、函数function () {'这是立即执行函数'}、select/content等
+  // (2) jQuery特有的选择规则(选出来的是jQuery对象) 
+  //     $('ul>li:first'); $('ul>li:eq(2)'); $('ul>li:odd/even');
+  // (3) filter('.demo')/filter(function (index) { return true/false; })  与not()相对立
+  //     has()  作修饰使用
+  //     find() eq()    is() -> true/false
+// jQuery都是函数式(函数调用)
+  // html(); text(); css(); attr(); prop();
+  // html()方法：取值取第一个  赋值赋一组
+  // css()方法：取值相当于getComputedStyle(),赋值相当于dom.style.***
+  //            取值取一个，赋值赋一组
+  // attr() prop() 取值赋值同上
+  // attr()主要依赖Element对象的getAttribute()和setAttribute()两个方法。
+  // prop()主要依赖的是JS原生中的对象属性获取和设置方式(eg:dom.className())
+  // 注：当遇到checked、selected、disabled时
+  //    attr()会返回html文档中该属性初始状态的值，而prop()会返回该属性实时状态的值(true/false)
+  // 
+  // addClass()  
+  //     $().addClass(function (index) {})
+  // removeClass()  如果不添参数，则remove掉当前对象的所有class
+  //     $().removeClass(function (index) {})
+  // toggleClass() 删除或添加。如果有则删除，没有则添加
+  //
+  // B.insertBefore(A)  剪切功能，返回B
+  // A.before(B)  剪切功能，返回A
+  // 
+  // D.appendTo(C)  D添加到C里，插入到所有子元素的最后一位
+  // C.append(D)  同上 依赖原生dom.appendChild()
+  // 
+  // prependTo() prepend()  插入到所有子元素的第一位
+  // 
+  // remove() detach() 把元素删除
+  // 区别：remove(); 删除元素节点后只返回该元素
+  //      detach(); 删除元素节点后返回该元素和该元素绑定的事件
+  // 
+  // 注册事件
+  // bind() 老版本
+  // $().on(event, eventSrc, data, fn (e) { e.data });
+  //    event事件  eventSrc事件源  data数据  e.data访问数据
+  //    $().one(); 只绑定一次事件,触发事件后立即解除绑定
+  // $().off(event, eventSrc, fn);
+  // 
+  // scrollTop() 滚动的距离：$(window).scrollTop();
+  // 
+  // width()           宽度：content 
+  // innerWidth()      宽度：content + padding
+  // outerWidth()      宽度：content + padding + border
+  // outerWidth(true)  宽度：求出的宽度带有margin
+  // 
+  // 创建dom  $('<div></div>'), $('<div>'), $('<div/>') (单标签写法)
+  // 
+  // 事件对象
+  // e.pageX 鼠标的位置相对于文档的距离
+  // e.clientX 相对于浏览器窗口的距离
+  // e.which  哪个键(不区分大小写)或鼠标按钮(1, 2, 3)
+  // e.button 哪个鼠标按键(0, 1, 2)
+  // 
+  // e.preventDefault();   e.stopPropagation();
+  // return false = e.preventDefault() + e.stopPropagation();
+  // 
+  // offset().left/top     相对于文档进行计算
+  // position().left/top   相对于有定位的父级进行计算，如没有，则等于offset()
+  // 
+  // parent(); 返回直接父级，可接收参数，参数仅限于筛选父级元素
+  // offsetParent(); 返回最近有定位的父级，不接收参数
+  // parents(); 返回所有的父节点，可接收参数(筛选)
+  // closest(); 筛选最近的节点，从自身开始找，必填参数
+  // next();  下一个兄弟节点
+  // prev();  上一个兄弟节点
+  // index(); 返回当前兄弟节点中的索引值
+  // siblings(); 返回当前元素节点的所有兄弟节点
+  // prevAll(); 返回当前元素上面的所有兄弟节点
+  // nextAll(); 返回当前元素下面的所有兄弟节点
+  // prevUntil(); nextUntil(); 掐头去尾去中间，传jQuery对象或DOM
+  // 
+  // val(); 依赖于原生js的value
+  // each(function (index, ele) { this === ele });  除了可遍历数组，也可遍历jq对象(类数组)
+  // end() 回退操作  同于prevObject属性
+  // clone() 克隆节点 参数为true时，事件也能克隆
+  // 
+  // wrap(); wrapInner();  循环包裹，可接收参数function
+  // $().wrapAll(); 包裹选中的元素$(),  会破坏dom结构
+  // unwrap(); 解除包裹，结构化标签(html、head、body)不能删除
+  // 
+  // A.add(B); 选中A和B进行集中操作
+  // slice(start, end); 截取，算头不算尾
+  // empty(); 将dom元素的内容设为空
+  // 
+  // serialize(); 串联表单数据
+  // serializeArray(); 串联表单数据成数组
+  // 
+  // animate(target, duration, speed, callback)
+  //      target要达到的目标点, duration运动的时间, speed速率, callback回调函数
+  //      tips: speed的jQuery插件 jquery.easing.js
+  // stop(boolean1, boolean2);   默认是stop(false, false);
+  //     boolean1: 是否停止后续所有运动    true是    false否
+  //     boolean2: 是否立即到达当前目标点  true是    false否
+  // delay();
+  // 
+  // slideUp(speed, callback) 如果元素已显示出来，滑动隐藏该元素
+  // slideDown() 滑动显示已隐藏的元素
+  // slideToggle(speed, callback) 滑动显示或隐藏
+  // fadeIn(); fadeOut(); fadeToggle();
+  // 以上方法都是通过animate()方法写的
+  // 
+  // trigger(event, []); 主动触发事件, 参数：事件类型 数组, 事件冒泡
+  // eg: $('li').on('click', function (e, data) {});
+  //     $('li').trigger('click', data);
+/* 实例方法 */
+
+/* 工具方法(定义在函数上) */
+  /* 普通的工具方法 */
+  // $.***  jQuety.***  调用
+  // $.type()  判断参数的数据类型
+  // $.trim()  消除字符串两边的空格
+  // $.proxy() 改变this指向 参数1：要改变的this的function  参数2：函数执行期上下文(改变到哪里)
+  // 
+  // $.noConflict();  把$控制权交给其他类库
+  //     eg: var jq = $.noConclict();  jq('div')有效  $('div')无效
+  // 
+  // $.parseJSON();  字符串转换成json  外部是单引号，内部属性是双引号，不需要回车符
+  // $.makeArray();  把类数组转换成数组
+
+  /* 高级的工具方法 */
+  // $.fn === $.prototype
+  // 
+  // extend作用
+  // 1.拓展
+  //    $.extend({}); 拓展新的工具方法
+  //    $.fn.extend(obj); 拓展新的实例方法
+  // 2.合并
+  //    $.extend(bl, obj, obj1) bl默认为false浅克隆, true深克隆  返回obj
+  // 总结
+  //    拓展 & 合并  都是合并, 拓展: 将obj合并到$/$.fn上, 合并: 将obj1合并到obj
+  // 
+  // var cb = $.Callbacks();  返回回调函数对象
+  // cb.add(fn1, fn2); 或 cb.add([fn1, fn2]);  给回调对象添加函数
+  // cb.fire(); 触发添加的函数, 重复fire也会重复执行
+  // 注：在局部作用域里使用cb.add()函数也会触发
+  // $.Callbacks(); 四个字符串形式的参数, 可组合使用
+  //    'once'        只执行一次fire()方法
+  //    'memory'      在fire()后面再add(fn) fn也会执行
+  //    'unique'      cb.add(fn1, fn1, fn1) 只执行一次fn1
+  //    'stopOnFalse' 当cb.add(fn1, fn2, fn3)的fn2中有return false;这样代码, fn2后的函数不执行
+  // 
+  // $.Deferred(); 延迟对象  相当于有状态的Callbacks();
+  //    添加函数(根据状态执行相应的函数)
+  //    done       fail       progress
+  //    触发函数(手动添加状态: 成功  失败  进行中)
+  //    resolve    reject     notify
+  // done, fail  -->  'once memory'
+  // progress    -->  'memory'
+  // notify触发后, done, fail还能触发一个
+  // done, fail触发一个之后就不能触发其他的了, 最终状态已告知
+  // var dtd = $.Deferred(); dtd.promise();  不能触发函数(无状态), 只读
+  // $.when()  返回延迟对象, 参数也为延迟对象, 当参数延迟对象全部触发done时, 最后触发when返回延迟对象的done函数
+
+/* 工具方法 */
+    </script>
+</body>
+</html>

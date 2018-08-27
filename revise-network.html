@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // form表单
+        // method：GET  POST等
+        // action：address
+        // enctype：规定在发送表单数据之前如何对其进行编码
+        //          application/x-www-form-urlencoded
+        //             在发送前编码所有字符（默认）
+        //          multipart/form-data(<input type="file">)
+        //             不对字符编码。在使用包含文件上传控件的表单时，必须只用该值
+        
+
+        // ajax(Asynchronous javascript and xml)  定外卖过程
+        // 以异步的形式操作xml(现在操作的是json)
+        // 1、浏览器
+        // 2、ajax对象
+        // 3、ajax.open(method, url, true);
+        // 4、ajax.send();
+        // 5、onreadystatechange == 4
+        // 6、status == 200  403服务器不允许请求  503服务器出现问题
+        // 
+        // ajax对象
+        // new XMLHttpRequest()                    // 其他主流浏览器
+        // new ActiveXObject('Microsoft.XMLHttp')  // ie
+        // 
+        // ajax对象方法
+        // abort() 停止当前请求
+        // getAllResponseHeaders() 把http请求的所有响应首部作为键值对返回
+        // getResponseHeader('server') 返回指定首部的串值
+        // open('method', 'url', true) 建立对服务器的调用
+            // method 可以是GET，POST或PUT
+            // url 可以是相对URL或绝对URL
+            // true是异步请求 false是同步请求
+        // send(content) 向服务器发送请求
+        // setRequestHeader('label', 'value') 把指定首部设置为所提供的值
+            // 在设置任何首部之前必须先调用open()
+        // 
+        // onreadystatechange 状态改变的事件触发器
+        // readyState 对象状态(integer) 
+            // 状态值 0 = 未初始化   未调用send()方法
+            // 状态值 1 = 读取中     已调用send() 正在发送请求
+            // 状态值 2 = 已读取     send()方法执行完成 接收到全部响应内容
+            // 状态值 3 = 交互中     正在解析响应内容
+            // 状态值 4 = 完成       响应内容解析完成
+        // responseText 获得字符串形式的响应数据
+        // responseXML  获得XML形式的响应数据
+        // status 服务器返回的状态码
+            // 404 = 文件未找到
+            // 200 = 成功
+            // 500 = 服务器内部错误
+            // 304 = 资源未被修改
+        // statusText 服务器返回的状态文本信息
+
+        // 同源策略(浏览器重要概念之一)
+        // 同源是指：域名、协议、端口相同
+        // 不同源的客户端脚本在没明确授权的情况下，不能读写对方的资源
+        // Ajax受同源策略的限制
+
+        // HTTP协议的默认端口为80 HTTPS默认端口为443
+        // HTTP是基于TCP协议
+        // TCP是面向连接的、可靠的、基于字节流的传输层通信协议
+        //      需要通过三次握手建立连接 四次挥手关闭连接
+        // UDP是简单的、面向数据报的无连接通信协议
+        
+        // 请求方法 GET POST的区别(都是相对的)
+        // 1、GET使用URL或Cookie传参，而POST将数据放在BODY中  ?NAME='CST'&AGE=18
+        // 2、GET的URL会有长度上的限制  POST可以传输很多数据
+        // 3、POST比GET安全
+
+        // 解决跨域的几种方法
+        // 1、flash(现在很少用，不做讨论)
+        // 2、服务器代理中转
+        //      同源策略只作用于浏览器
+        //      浏览器 --> 同源后端文件 --> 跨域文件
+        // 3、Jsonp
+        // 4、document.domain(针对基础域名相同的情况)
+        //      eg: bj.58.com document.domain = '58.com'
+        //          tj.58.com document.domain = '58.com'
+        // src不受同源策略限制 所以使用script的src来实现跨域
+        // jsonp原理(get请求)
+        // 1、web页面上用<script>引入js文件时不受是否跨域的影响(拥有"src"属性的标签都拥有跨域的能力)
+        // 2、于是我们把数据放到服务器上，并且数据为json格式(因为js可以轻松处理json数据)
+        // 3、因无法监控通过<script>的src属性是否把数据获取完成，所以需要做一个处理
+        // 4、实现定义好处理跨域获取数据的函数，如function doJSON(data) {}
+        // 5、用src获取数据的时候添加一个参数cb='doJSON'(服务器会根据参数cb的值返回 对应的内容)
+        //    此内容为以cb对应的值doJSON为函数真实要传递的数据为函数的参数的一串字符 如：doJSON('string')
+        // eg(jsonp): var oScript = document.createElement('script');
+        //            oScript.src = 'http://wthrcdn.etouch.cn/weather_mini?city=深圳&callback=ds'
+        //            document.body.appendChild(oScript);
+        //            function ds(data) {
+        //                console.log(data);
+        //            }
+        // 
+        // cookie
+        // 子域能取主域的值 反之不行 path不同也不能互相取值
+        // 能保留用户信息的方法
+        // 1、标记用户身份http请求首部
+        //    form: e-mail
+        //    user-agent: 浏览器
+        //    referer: 跳转链接
+        // 2、IP地址
+        // 3、用户登录
+        // 4、胖URL
+        // 5、cookie
+        // 
+        // iframe(dom元素)  理解跨域思路即可
+        // 可以将一个网页嵌入另一个网页
+        //     导航栏tab切换页(古老的做法) 在线编辑器 广告植入
+        // 跨域通信
+        // iframe利弊
+        // window.onload iframe.onload 会阻塞页面加载
+        //     通过JS动态设置iframe的src可以避免阻塞情况
+        //     解决跨域问题 现在已经不怎么用
+        // iframe获取窗口
+        // 获取子窗口
+        //     document.getElementsByTagName('iframe')[0].contentWindow
+        //     简易写法
+        //     window.frames['iframe的name']
+        // IE专用
+        //     document.iframes[name].contentWindow
+        //     document.iframes[i].contentWindow
+        // 获取父窗口
+        //     window.parent  父级窗口对象
+        //     window.top     顶级窗口对象
+        // 父子串口通信
+        //     父访问子(等待子iframe加载完成后可以通过iframe.contentWindow.变量 访问也会涉及跨域问题)
+        //     子访问父涉及跨域问题
+        // 解决跨域问题
+        // 1、document.domain: 解决跨域限制最好的办法
+        // 2、window.location.hash: 解决子页面访问父页面数据问题
+        //                   .href:
+        // 3、window.name: 解决父页面访问子页面的数据问题
+        // 4、H5 PostMessage   
+        // 
+        // 函数防抖(throttle)&节流(debounce)  坐电梯&坐地铁
+        // 对于DOM操作 资源加载等耗费性能的处理 很可能导致页面卡顿甚至浏览器崩溃
+        // 函数防抖：在函数需要频繁触发情况时，只有足够空闲的时间，才执行一次
+        //     使用场景：实时搜索(keyup) 调整窗口(resize)
+        // 函数节流：预定一个函数只有在大于等于执行周期时才执行 周期内调用不执行
+        //     使用场景：页面滚动(scroll) 抢购疯狂点击(mousedown) 拖拽(mousemove)
+
+
+    </script>
+</body>
+</html>

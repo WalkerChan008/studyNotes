@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // let const  块级作用域声明
+        // let const共同特性：
+        //      1、不存在变量提升
+        //      2、不允许重复声明
+        //      3、块级作用域
+        //      4、暂时性死区
+        // const单独特性：
+        //      1、只能声明只读常量，声明的变量指向的内存地址不能改变
+        // 
+        // 预编译时变量不提升，但会存储在TDZ（Temporal Dead Zone）暂时性死区当中
+        // js代码解析执行时如果未定义就使用TDZ中的变量会报错
+        // 
+        // eg：console.log(a);
+        //     // var a = 0;
+        //     let a = 0;
+        // 预编译过程：
+        //      TDZ = [a]   把TDZ看做是一个数组
+        // 解释执行过程：
+        //      通过控制台打印a时首先判断a是否在TDZ中，在则报错
+
+        // 函数的扩展
+        // 1、函数参数的默认值
+        // eg: function getX() { return 0 }
+        //     function demo(x = getX(), y = 1) {}
+        //     在参数的值绝对等于undefined时才会计算默认值表达式的值
+        //     参数默认值是惰性求值的
+        // eg: function demo(x = y, y) {}    存在TDZ
+        // 
+        // 
+        // 对象的扩展
+        // 1 对象属性简写
+        // eg: let name = '111';
+        //     let obj = {
+        //         name,
+        //         sayName() {
+        //             console.log(this.name);
+        //         }
+        //     }
+        // 2 可计算属性
+        // let first = 'first';
+        // let second = 'second';
+        // let third = 'third';
+        // let obj = {
+        //     [first + '-' + 'second']: third
+        // }
+        // console.log(obj[first + '-' + 'second'])
+        // 3 ES6中新增的方法 
+        // ECMA定义新的方法，不在全局定义，Object.prototype
+        // 静态方法  Object.is() 加强的比较运算符
+        // eg: Object.is(NaN, NaN);
+        //     NaN === NaN; NaN == NaN;
+        //     Object.is(+0, -0);
+        //     +0 === -0;
+        // 对象合并 obj2中的属性copy到obj1中
+        // Object.assign(obj1, obj2);
+        // 将对象转为数组
+        // Object.keys(obj)
+        // Object.values(obj)
+        // Object.entries(obj)
+        // 
+        // 增强对象原型
+        // ES6之前对同一个构造函数进行new操作会共享原型
+        // obj.__proto__ 非标准的获取对象的原型对象的方法
+        // Object.getPrototypeOf(obj) 标准的获取对象的原型对象的方法(ES5)
+        // Object.setPrototypeOf(obj1, obj2)
+        // 设置obj1的指定原型为obj2(ES6) 类似圣杯模式
+        // 
+        // 
+        // 解构赋值 (其中使用对象属性简写方式)
+        // 1 对象的解构赋值 (key: value)
+        // 特点: 属性名key对应
+        // 实质: 模式匹配
+        // 规则: key加上冒号 key: 
+        // 完全解构
+        // let obj = {a: 1, b: 2, c: 3}
+        // let {a, b, c} = obj
+        // 部分解构(不完全解构)
+        // let {a, b} = obj
+        // 解构失败
+        // let {a, b} = {a: 1}   b = undefined
+        // 
+        // 解构时添加默认值
+        // let {a, b=2} = {a: 1}  b的心理活动(b = b ? 2 : b)
+        // 上式等于 let {a, b: b=2} = {a: 1}
+        // 解构全局的Math方法
+        // let {PI, radom, floor, ceil} = Math;
+        // 嵌套解构
+        // 
+        // 2 数组的解构赋值
+        // 特点: 位置对应
+        // eg: swap交换a与b的值
+        //     let a = 1;
+        //     let b = 2;
+        //     [a, b] = [b, a]
+        // 详解
+        // 定义时
+        //      0x000   1 a
+        //      0x001   2 b
+        // 交换时
+        //      0x002   a 2
+        //      0x003   b 1
+    </script>
+</body>
+</html>

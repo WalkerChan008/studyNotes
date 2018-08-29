@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- lang="en"告诉搜索引擎爬虫，我们的网站是关于什么内容的 -->
+<head>
+    <meta charset="UTF-8"><!-- 编码字符集 -->
+    <title>Document</title>
+    <script type="text/javascript" src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+    <script type="text/javascript">
+
+/*专业素养*/
+// html  hyperText Markup Language
+// <html></html>  根标签
+// <head></head> 设置浏览器特性
+ 
+// <body></body>
+// 空格和回车 在HTML里面是 文本分割符
+// HTML编码  &nbsp;  &lt; &gt;
+
+// 有序列表  <ol type="1/a/A/i/I" reversed="reversed" start="数字"><li></li></ol>
+// 无序列表  <ul type="disc/square/circle"><li></li></ul>
+// list-style:none; 
+
+// <img src="" alt="图片占位符" title="图片提示符"> 
+// 地址：
+// 1.网上的url
+// 2.本地的绝对路径
+// 3.本地的相对路径
+// 
+// <a href="#" target="_blank"></a>  hyperText reference
+// 1.超链接
+// 2.锚点
+// 3.打电话、发邮件 <a href="tel:/mailto:"></a>
+// 4.协议限定符  <a href="javascript:"></a>
+// 
+// <form method="get/post" action="">
+// 
+// 		<input type="text/password/submit/button/radio/checkbox" name="" value="">
+// radio & checkbox  checked="checked"
+// 
+// <select>
+// 		<option></option>
+// </select>
+// 
+// 
+// </form>
+
+
+
+
+
+/*cascading style sheet   层叠样式表*/
+// 行间样式  页面CSS  外部CSS文件
+// 选择器
+  // 一、基础选择器
+	// 1.id选择器 #id
+	// 2.class类选择器 .class
+	// 3.标签(元素)选择器  element
+	// 4.通配符选择器  * {}
+	// 5.属性选择器  [id=""]
+
+//复杂选择器
+  // 1.父子选择器/派生选择器   div|#id|.class span {}  
+  // 2.直接子元素选择器    div > span
+	//自右向左的顺序遍历
+  // 3.并列选择器   div.demo {}
+  // 4.分组选择器   em,
+  //                strong,
+  //                p {}
+
+//伪类选择器
+  // :hover
+
+// 伪元素
+  // 天生就存在  inline行级元素
+  // 逻辑前/逻辑后  
+  // ::before/::after { content:""; }
+
+// css权重(选择器)
+  // !important           Infinity
+  // 行间样式             1000     (256进制)
+  // id                   100      (256进制)
+  // class|属性|伪类      10       (256进制)
+  // 标签|伪元素          1        (256进制)
+  // 通配符               0        (256进制)
+
+// css基础属性
+  // font-size:16px;    //设置字体的高
+  // font-weight:lighter|normal|bold|bolder  100|200|...|900
+  // font-style:italic;
+  // font-family:;
+  // color:;
+
+// 颜色
+	// 纯英文单词  red
+	// 颜色代码    #f40;
+	// 颜色函数    rgb(255,255,255);
+
+// 边框
+	// border: 1px solid red;
+	// border-width:1px;
+	// border-style:solid;
+	// border-color:red;
+		// border画三角形
+		// div {
+		// 	width:0;
+		// 	height:0;
+		// 	border:100px solid black;
+		// 	border-left-color:black;
+		// 	border-right-color:transparent;
+		// 	border-top-color:transparent;
+		// }
+
+// 文本
+	// text-align:left|center|right;
+	// line-height:; 
+		// 垂直居中：行高等于容器的高
+	// text-indent:2em; 首行缩进
+	// text-decoration:;
+	// cursor:;   光标样式
+	// vertical-align:10px/middle;
+
+// 单位
+   // px  em  相对单位
+   // 1 em = 1 font-size = 16px;
+
+
+
+/*总结：*/
+// 	1.行级元素(内联) inline
+// 		feature：内容决定元素所占位置
+// 		         不可以通过css改变宽高
+// 		span  strong  em  a  del
+// 
+// 	2.块级元素  block
+// 		feature：独占一行
+// 				 可以通过css改变宽高
+// 		div  p  ul  ol  li  form
+// 
+//  3.行内块级元素  inline-block
+// 		feature：内容决定元素所占位置
+// 				 可以通过css改变宽高
+//		img
+// 
+//  凡是带有inline的元素，都有文字特性 (文本类特点)
+// 
+//  行级元素只能嵌套行级元素(a不能嵌套a)
+//  块级元素可以嵌套任何元素(p不能嵌套div)
+
+
+
+/*企业开发经验*/ 
+/*编程方法：先定义功能，后选配功能  先写CSS，后在HTML选用*/
+/* 初始化/自定义标签 */
+
+/*盒子三大部分*/
+  // 盒子的组成部分：
+	// 盒子壁 border
+
+	// 内边距 padding
+
+	// 盒子内容 width + height
+
+	//盒模型 margin + border + padding + (content)
+
+
+// body 默认的margin值为 8px
+// margin:0 auto;
+
+
+// margin坍塌 (嵌套标签)
+// 弥补方法：bfc ( block format context )、父级上设置border-top
+// 如何触发bfc
+  // position:absolute;
+  // display:inline-block;
+  // float:left/right;
+  // overflow:hidden;   溢出隐藏
+// margin合并 (兄弟标签)   通过数学计算
+
+// float:left/right; 
+  // 1.浮动元素产生了浮动流
+	// 所有产生了浮动流的元素，块级元素看不到他们
+	// 产生了bfc的元素和文本类属性(inline)的元素以及文本都能看到浮动元素
+  // 清除浮动(父级包住浮动流，块级元素内clear才能生效)
+  	// clear:both/left/right;
+  // 最原始的用法是做文字环绕
+
+   
+
+
+/* 定位  层模型 */
+   // position:absolute | relative | fixed;
+   // 1.absolute  ①脱离原来位置进行定位
+   // 			  ②最近的有定位的父级进行定位，如果没有，
+   // 				那么相对于文档进行定位
+   // 2.relative  ①保留原来位置进行定位
+   // 			   ②相对于原来的位置进行定位
+   // 3.fixed
+	// left  top  right  bottom 只能和position捆绑使用
+	// z-index:数字;  默认为0
+
+/*设置了position和float这两个属性的任意一个，内部就会把元素转换成inline-block*/
+
+// 溢出容器，要用省略号展示
+  // 1.单行文本(三件套)
+  	// white-space:nowrap;
+  	// overflow:hidden;
+  	// text-overflow:ellipsis;
+  // 2.多行文本(只做截断，不做打点)
+  	// overflow:hidden;
+
+// background-image:url(111.jpg);
+// background-size:width height;
+// background-repeat:repeat/no-repeat/repeat-x/repeat-y
+// background-position:x y;  x y为数字 百分数  top left ...
+
+// 背景图加载不了的情况(网速过慢CSS和JS加载不出来时)显示文字
+	// 解决方法:1.text-indent:200px;
+	// 			  white-space:nowrap;
+	// 			  overflow:hidden;
+	//          2.width:200px;
+	//            height:0;
+	//  		  padding-top:100px;
+	//            overflow:hidden;
+
+
+
+
+
+// BOM
+  // 常用的属性和方法
+    // Window
+      // 对象方法
+      // alert() 
+      // clearInterval()
+      // clearTimeout()
+      // close()
+      // confirm()
+      // open()
+      // prompt()
+      // scrollBy()
+      // scrollTo()
+      // setInterval()
+      // setTimeout()
+      //
+      // 对象属性
+      // innerHeight
+      // innerWidth
+      // pageXOffset
+      // pageYOffset
+      // screenLeft/screenX
+      // screenTop/screenY
+      //
+    // Navigator
+      // 对象属性
+      // cookieEnabled
+      // onLine
+      // userAgent
+    // History
+      // 对象属性
+      // length
+      // 
+      // 对象方法
+      // back()
+      // forward()
+      // go()
+    // Location
+      // 对象属性
+      // hash
+      // host
+      // href
+      // pathname
+      // protocol
+      // search
+      // 
+      // 对象方法
+      // assign
+      // reload('force')
+      // replace()
+
+
+
+
+
+
+// DOM
+  // 用于操作HTML和XML
+  // 不能改变CSS样式表(但可以增加行内样式)
+  // 从DOM开始，一切由系统生成的成组的形式基本上都是类数组
+  // 常用的(实时): document.getElementById();
+  //         .getElementsByTagName();
+  // 不常用(实时): .getElementsByClassName()兼容性不好
+  //           .getElementsByName()
+  // 静态的：.querySelector()  CSS选择器 选一个
+  //         .querySelectorAll()  CSS选择器 选一组
+  // 
+  // getElementById方法定义在Document.prototype上，即Element节点上不能使用
+  // 
+  // getElementsByTagName方法定义在Document.prototype和Element.prototype上
+  // 
+  // document.body/.head/.documentElement分别指代body、head和html元素
+  // 
+  // 
+// 1.对节点的增删改查
+ // 查
+  // 遍历节点树
+  // parentNode      ->  父节点 (最顶端的parentNode为#document)
+  // childNodes      ->  子节点们
+  // firstChild      ->  第一个子节点
+  // lastChild       ->  最后一个子节点
+  // nextSibling     ->  后一个兄弟节点
+  // previousSibling ->  前一个兄弟节点
+  // 
+  // 基于元素节点树的遍历 (IE不兼容（IE9及IE9以下），除了children)
+  // parentElement 
+  // children   记
+  // node.children.length
+  // firstElementChild
+  // lastElementChild
+  // nextElementSibling/previousElementSibling
+  // 
+  // 节点类型
+  // 元素节点  ————  1  !记
+  // 属性节点  ————  2
+  // 文本节点  ————  3  !记
+  // 注释节点  ————  8  !记
+  // document  ————  9  !记
+  // DocumentFrangment  ————  11
+  // 获取节点类型  nodeType
+  // 
+  // 节点的四个属性
+  // nodeName  元素的标签名，以大写形式表示，只读
+  // nodeValue Text节点或Comment节点的文本内容，可读写
+  // nodeType  该节点的类型，只读       !记
+  // attributes Element节点的属性集合
+  // 节点的一个方法 Node.hasChildNodes();
+  // 
+ // 增
+  // document.createElement();     常用 !记
+  // document.createTextNode();
+  // document.createComment();
+  // document.createDocumentFragment();
+  // 
+ // 插
+  // PARENTNODE.appendChild();    // appendChild是剪切操作
+  // PARENTNODE.insertBefore(a, b);
+  // 
+ // 删
+  // parent.removeChild();
+  // child.remove();   es5标准
+  // 
+ // 替换
+  // parent.replaceChild(new, origin);
+  // 
+// 2.Element节点
+ // 属性
+  // innerHTML
+  // innerText(老版火狐不兼容)/textContent(支持火狐不支持老版IE，知道有这个就行)
+  // 
+ // 方法
+  // element.setAttribute();
+  // element.getAttribute();
+
+// BOM的基本操作(面试不考)
+  // 查看滚动条的滚动距离
+    // window.pageXOffset/pageYOffset  IE及IE8以下不兼容
+    // document.body/documentElement.scrollLeft/scrollTop
+        // 兼容性比较混乱，用时去两个值相加，因为不可能存在两个同时有值
+  // 查看视口的尺寸
+    // window.innerWidth/innerHeight(加上滚动条宽度/高度)  IE及IE8以下不兼容
+    // document.documentElement.clientWidth/clientHeight  标准模式下，任意浏览器都兼容
+    // document.body.clientWidth/clientHeight  适用于怪异模式下的浏览器
+  // 查看元素的几何尺寸
+    // domEle.getBoundingClientRect();  兼容性很好
+  // 查看元素的尺寸
+    // dom.offsetWidth / offsetHeight   取代几何尺寸
+  // 查看元素的位置
+    // dom.offsetLeft / offsetTop 
+    // 对于无定位父级元素，返回相对文档的坐标。对于有定位父级的元素，返回相对于最近的有定位的父级的坐标(无论是left还是margin-left等都是距离)
+    // dom.offsetParent
+    // 返回最近有定位的父级，如无，返回body，body.offsetParent返回null
+  // 滚动条滚动
+    // window上有三个方法
+        // scroll(x, y)  scrollTo(x, y)  scrollBy(x, y)
+        // 实现让滚动轮滚动到当前位置，scrollBy()会会在之前的基础上做累加
+// 脚本化CSS
+  // 读写元素CSS属性
+    // dom.style.prop
+    // 可读写行间样式，无兼容问题，碰到float这样的关键字属性，建议：float -> cssFloat
+    // 复合属性建议拆解eg：border   组合单词小驼峰写法
+    // 写入值必须是字符串格式
+  // 查询计算样式(只读)
+    // 1、window.getComputedStyle(ele, null) 
+    // ele为DOM元素，第二个值平时为null，需要查询伪元素after、before时，null改为伪元素字符串形式传入
+    // 返回值为绝对值，没有相对单位  IE及IE8以下不兼容
+    // 2、ele.currentStyle  IE独有属性   返回值没有经过转换 为绝对值
+  // 普遍来说改变状态位的操作，从代码效率和后期维护来讲，使用className进行比dom.style.prop更快更好   改变伪元素也是使用改变类选择器的伪元素
+// 绑定事件
+    // 1、ele.onxxx = function(event) {}
+    // 兼容性很好，但一个元素只能绑定一个处理程序
+    // 基本等同于写在HTML行间上
+    // 程序this指向dom元素本身
+    // 2、ele.addEventListener(type, fn, false);
+    // IE9以下不兼容，可以为一个事件绑定多个处理程序
+    // 程序this指向dom元素本身
+    // 3、ele.attachEvent('on' + type, fn);
+    // IE独有，一个事件同样可以绑定多个处理程序
+    // 程序this指向window
+// 解除事件
+    // 1、ele.onclick = false/''/null;
+    // 2、ele.removeEventListener(type, fn, false);
+    // 3、ele.detachEvent('on' + type, fn);
+// 事件处理模型 —— 事件冒泡、捕获
+    // 事件冒泡：
+    // 结构上(非视觉上)嵌套关系的元素，会存在事件冒泡的功能，即同一事件，自子元素冒泡向父元素(自底向上)
+    // 事件捕获：
+    // 结构上(非视觉上)嵌套关系的元素，会存在事件捕获的功能，即同一事件。自父元素捕获至子元素(事件源元素)(自顶向下)
+    // ele.setCapture(); ele.releaseCapture();  能在任何地方获取事件 能说出来即可 仅IE
+    // 触发顺序，先捕获，后冒泡
+    // focus、blur、change、submit、reset、select等事件不冒泡
+    // 取消冒泡：
+    // 1、W3C标准 event.stopPropagation(); 不支持IE9以下版本
+    // 2、IE独有  event.cancelBubble = true;
+    // 阻止默认事件：
+    // 1、return false; 以对象属性的方式注册的事件才生效
+    // 2、event.preventDefault(); W3C标准 IE9以下不兼容
+    // 3、event.returnValue = false; 兼容IE
+// 事件对象
+    // evnet || window.event  用于IE
+    // 事件源对象：
+    // event.target  火狐独有
+    // event.srcElement  IE独有
+    // 以上两个Chrome都有
+// 事件委托
+    // 利用事件冒泡，和事件源对象进行处理
+    // 优点：
+    // 1、性能 不需要循环所有的元素一个个绑定事件
+    // 2、灵活 当有新的子元素时不需要重新绑定事件
+// 事件分类
+    // 鼠标事件
+    // click、mousedown、mousemove、mouseup、contextmenu、mouseover、mouseout、mouseenter、mouseleave
+    // 使用event的button来区分鼠标的按键  0/1/2
+    // DOM3标准规定：click事件只能监听左键，鼠标的按键只能通过mousedown和mouseup来判断鼠标按键
+    // 手机的使用touchstart、touchmove、touchend
+    // 
+    // 键盘事件
+    // keydown > keypress > keyup
+    // keydown和keypress的区别：
+    // keydown可以响应任意键盘按键，keypress只能响应字符类键盘按键
+    // keypress返回ASCII码，可以转换成相应字符
+    // String.fromCharCode(unicode);
+    // 
+    // 文本操作事件
+    // input、focus、blur、change
+    // 
+    // 窗体操作类
+    // scoll、load
+    // load 需要等domTree和cssTree结合生成randerTree才执行  效率低，不推荐使用
+
+    // domTree + cssTree = randerTree   生成树深度优先
+    // domTree  loading --> loaded --> waiting cssTree's loading
+    // dom优化   dom节点改变会导致randerTree重新生成，页面重新绘制
+    // reflow(重构、重排) 效率最低
+        // dom节点的删除，增加
+        // dom节点的宽高变化，位置变化，display none --> block
+        // offsetWidth、offsetLeft等
+    // repaint(重绘)  会影响效率，但可以接受  重绘只改变的那一部分
+    // 
+// JSON
+    // JSON是一种传输数据的格式
+    // JSON.parse();         string --> json
+    // JSON.stringify();     json --> string
+// 异步加载JS
+    // 1、defer  要等dom文档全部解析完才会被执行。只有IE能用  可以把js代码写入内部
+    // 2、async  加载完就执行，只能加载外部脚本，不能把js写在script标签里
+        // 1 2  执行时不阻塞页面
+    // 3、创建script，插入到DOM中，加载完毕后callBack
+    // DOMContentLoaded  等domTree加载完    同JQ的$(document).ready(dunction () {});
+// 正则表达式RegExp
+    // 字面量  var reg = //mig;
+    // var reg1 = new RegExp('', 'mig');
+        // reg1 = RegExp(reg);  引用，本质上reg1和reg是同一个
+        // reg1 = new RegExp(reg);  相互独立
+    // 正则表达式的属性(修饰符)
+    // 贪婪匹配原则，能多则多
+        // i  执行忽视大小写
+        // g  执行全局匹配(查找所有而非找到第一个后停止)
+        // m  执行多行匹配 
+            // var reg = /^a/gm;
+            // var str = 'abcde\na';
+            // str.match(reg);
+    // reg.test();   返回true或者false
+    // str.match();  直接返回匹配的字符串
+    // var reg = /[范围][范围][范围]/g;   []为一个值
+    // 
+    // \w === [0-9A-z_]    \W === [^\w]
+    // \d === [0-9]        \D === [^\d]
+    // \s === [\t\n\r\v\f ] 注：还有空格   \S === [^\s]
+    // \b === 单词边界     \B === 非单词边界
+    // \t\n  匹配的也一定是\t\n，而非视觉上
+    // . === [^\r\n]
+    // 量词
+    // n+     {1, }   n可以出现1次到多次
+    // n*     {0, }   n可以出现0次到多次
+    // n?     {0,1}   n可以出现0次到1次
+    // n{x}   {x}     n只能出现x次
+    // n{x,y} {x,y}   n可以出现x次到y次
+    // n{x, } {x, }   n可以出现x次到多次
+    // n$             n结尾
+    // ^n             n开头
+
+    // var str = "aaaabbbb";
+    // var reg = /(\w)\1/g;  (a):子表达式;  \1:反向引用第一个子表达式;
+    
+
+    // 
+    // reg.exec(); 和lastIndex协调配合使用
+    // 游标属性 reg.lastIndex  可读写
+    // eg:  var reg = /ab/g;  不加g游标不动
+    //      var str = "abababab";
+    //      console.log(reg.exec(str));
+    //      console.log(reg.exec(str));
+    //      console.log(reg.lastIndex);
+    // 注：1、exec()会返回子表达式的值
+    //     2、str.match() 不加g会返回子表达式里的值
+    //     3、str.search(reg) 返回的是匹配的位置，匹配不到返回-1
+    //     4、str.split(reg) 也会返回子表达式里的值
+
+
+
+    // str.replace("", "");  正常的只能替换一个
+    // eg1:  var reg = /(\w)\1(\w)\2/g;
+    //      var str = "aabb";
+    // str.replace(reg, '$2$2$1$1');  //$符在replace()中也代表反向引用
+    // str.replace(reg, function ($, $1, $2) {
+        // return $2 + $2 + $1 + $1; 
+     // });
+    // eg2:  the-first-name --> theFirstName
+    //   var reg = /-(\w)/g;
+    //   var str = "the-first-name";
+    //   str.replace(reg, function ($, $1) {
+          // return $1.toUpperCase();
+    //   });      // 匹配几次fn执行几次
+
+    // (非)正向预查 正向断言 
+    // ?=n    ?!n
+    // eg:  var str = "abaaaaa";
+    //      var reg = /a(?=b)/g;  b不参与选择，只参与修饰或限定
+
+    // 打破原有规则
+    // 在任何量词后加英文问号"?",这样就改成非贪婪匹配
+
+    // 
+    // 补充
+    // img图片预加载
+    // var oImg = new Image();
+    // oImg.src = '';
+    // oImg.onload = function () {
+        // document.body.appendChild(oImg);
+    // }
+    // img懒加载
+    // 
+    // 文档碎片
+    // document.createDocumentFragment();
+    // eg:在dom树已有的ul中添加一万个li，提升性能
+    // 
+    // 断点调试
+    // debugger;   console.log();
+
+
+
+
+
+
+// ECMAScript
+    // 目前的浏览器是基于es3.0的 + es5.0的新增方法使用的
+    // es3.0 和es5.0产生冲突的部分  会使用es3.0的语法
+    // es5.0严格模式  es3.0和es5.0产生冲突的部分使用es5.0的，否则就使用es3.0的
+    // es5.0严格模式的启动  "use strict";
+    // 全局严格模式  局部函数内严格模式(推荐)
+
+    // 不支持with，arguments.callee，func.caller，赋值变量前一定要声明
+
+    // with(obj) {}
+    // 会把obj对象当作代码体的作用域链的最顶端
+    // 缺点：效率变慢
+
+    // 局部this必须赋值，否则为undefined，赋值什么就是什么，拒绝重复属性
+
+
+
+    // 在try里面发生错误，不会执行错误后的try里面的代码
+    // try {
+
+    // } catch (e) { //error  error.message error.name
+
+    // }
+
+
+    
+
+
+    //数组常用方法(数组是散列结构)
+    //ES 3.0
+    //改变原数组
+    //push  pop  shift  unshift  reverse  
+    //splice(index从第几位开始，howmany截取多少的长度，itemX在切(可)口(不)处(填)添加新的数据)
+    //sort 1.必须写两个形参  
+    //     2.看返回值：1) 当返回值为负数时，那么前面的数放在前面
+    //                 2) 为正数，那么后面的数在前面
+    //                 3) 为0，不动
+    //  var arr = [1, 3, 5, 4, 10];
+    //  arr.sort(function (a, b) {
+
+    // return a - b;   //升序
+    // return b - a;   //降序
+    //  });
+
+    //给一个有序的数组乱序
+    // var arr = [1, 2, 3, 4, 5, 6, 7];
+    // arr.sort(function () {
+    // 	return Math.random() - 0.5;
+    // });
+
+    //不改变原数组
+    //arr.concat(arr1)  toString
+    //slice(start, end)start从该位开始截取,end截取到该位(不包括end)
+    //join("")连接，返回字符串
+    //split("-") -- string  与字符串互逆
+
+    // 深入数组扩展方法并应用
+    // forEach
+      // arr.forEach(function () {})
+    // filter筛选
+    // map 返回return的值的数组
+    // reduce 迭代  累加器  (效率比for循环高)  reduceRight
+      // var arr = [1, 2, 3, 4, 5];
+      // arr.reduce(function (preValue, ele, index, array) {
+        // console.log(preValue);
+        // return ele;
+      // }, 10);   // 10为初始值,如果不传值，则初始值为1, ele为2
+
+ 
+
+
+    //类数组  (必须有length属性)
+    // var obj = {
+    // 	"0" : 'a',
+    // 	"1" : 'b',
+    // 	"2" : 'c',
+    // 	"length" : 3,
+    // 	"push" : Array.prototype.push,
+    // 	"splice" : Array.prototype.splice
+    // }
+    //属性要为索引(数字)属性，必须有length属性，最好加上push
+    //好处
+    //push原理   length
+    // Array.prototype.push = function (target) {
+    // 	this[this.length] = target;
+    // 	this.length ++;
+    // }
+
+    // fn.caller  arguments.callee
+    // fn函数被调用时，fn.caller会返回调用fn函数的函数体
+    // fn自执行时，会返回null
+    // arguments.callee会返回fn
+
+    //自写type方法
+    //1.分两类  原始值 引用值
+    //2.区分引用值
+    // function type(target) {
+    //     var ret = typeof(target);
+    //     var toStr = Object.prototype.toString;
+    //     var temp = {
+    //         "[object Array]": "array",
+    //         "[object Object]": "object",
+    //         "[object Number]": "nmber_object",
+    //         "[object Boolean]": "boolean_object",
+    //         "[object String]": "string_object"
+    //     }
+    //     if (target === null) {
+    //         return "null";
+    //     } else if (ret == "object") {
+    //         var str = toStr.call(target);
+    //         return temp[str];
+    //     } else {
+    //         return ret;
+    //     }
+    // }
+
+    //数组去重   原型链上实现
+    //方法  把数组里的数当作对象中的属性key
+    //对象中属性名唯一   hash
+    // var obj = {
+    // 	1 : 'unique',
+    // 	2 : 'unique'
+    // }
+    // obj[1] --> undefined;
+    // obj[1] --> 'unique';
+    // obj[2] --> undefined;
+    // var arr = [1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 3, 3, 6, 6, 6]
+    // Array.prototype.unique = function () {
+    // 	var obj = {},
+    // 	    arr = [],
+    // 	    len = this.length;
+    // 	for(var i = 0; i < len; i ++) {
+    // 		if(!obj[this[i]]) {
+    // 			obj[this[i]] = 'unique';
+    // 			arr.push(this[i]);
+    // 		}
+    // 	}
+    // 	return arr;
+    // }
+
+
+
+
+    //深度克隆
+    //遍历对象  for(var prop in obj)
+    //1.判断是不是原始值  typeof() object
+    //2.判断是数组还是对象  instanceof  toString  constructor
+    //3.建立相应的数组或对象
+    //递归
+    // var obj = {
+    // 	name : 'abc',
+    // 	age : 132,
+    // 	card : ['visa', 'master'],
+    // 	wife : {
+    // 		name : 'bds',
+    // 		son : {
+    // 			name : 'sdf'
+    // 		}
+    // 	}
+    // };
+    // var obj1 = {};
+    // function deepClone(origin, target) {
+    // 	var target = target || {},
+    // 	    toStr = Object.prototype.toString,
+    // 	    arrStr = '[object Array]';
+    // 	    for(var prop in origin) {
+    // 	    	if(origin.hasOwnProperty(prop)) {
+    // 	    		if(origin[prop] !== 'null' && typeof(origin[prop]) == 'object') {
+    // 					target[prop] = (toStr.call(origin[prop]) == arrStr) ? [] : {};
+    // 	    			deepClone(origin[prop], target[prop]);
+
+    // 	    		}else{
+    // 	    			target[prop] = origin[prop];
+    // 	    		}
+    // 	    	}
+    // 	    }
+    // 	    return target;
+    // }
+
+
+
+
+    //三目运算
+    //条件判断? 是 : 否  并且会返回值
+
+
+
+
+    // this
+    // 1.预编译 this --> window
+    // 2.谁调用的this指向谁
+    // 3.call apply
+    // 4.全局this --> window
+    // function a() {
+    // 	console.log(this);
+    // }
+    // a();  //a() --> a.call();
+
+    // eg：
+    // var name = '222';
+    // var a = {
+    // 	name : '111',
+    // 	say : function () {
+    // 		console.log(this.name);
+    // 	}
+    // }
+    // var fun = a.say;
+    // fun();
+    // a.say();
+    // var b = {
+    // 	name : '333',
+    // 	say : function (fun) {
+    // 		fun();
+    // 	}
+    // }
+    // b.say(a.say);
+    // b.say = a.say;
+    // b.say();
+
+
+
+    // call & apply 的应用之一
+    // function Person(name, age) {
+    // 	this.name = name;
+    // 	this.age = age;
+    // }
+    // function Student(name, age, sex) {
+    // 	// var this = Object.create(Student.prototype);
+    // 	Person.call(this, name, age);
+    // 	this.sex = sex;
+    // }
+    // var student = new Student('chen', 18, 'male');
+
+
+
+    // Person.prototype.name = 'walker';
+    // function Person(lastName, age, sex) {
+    // var this = Object.create(Person.prototype);
+    // this = { __proto__ : Person.prototype };
+    // call & apply是改变this的指向，区别是传参列表不同
+    // call&apply会立即执行 bind不会
+    //     //call(obj)  -->  this == obj
+    //     //apply(obj,[])
+    //     // call 需要把实参按照形参的个数传进去
+    //     // apply 需要传一个arguments
+    //     this.grade = 4;
+    //     this.lastName = lastName;
+    //     this.age = age;
+    //     this.sex = sex;
+    //     //return this
+    // }
+    // var person = new Person(); //new之后才会有this = {}
+
+
+
+
+    // 对象的创建方法
+    // 1、var obj = {};                          字面量
+    // 2、var obj = new Object();
+    // 3、function Person() {};                构造函数
+    //    var person = new Person();
+    // 4、Object.create(ptoto, definedProperty)
+
+
+
+
+
+
+    // 原型：
+    // 原型 Car.prototype   
+    // 祖先是 Car.prototype = {}   
+    // Car.prototype.height = 1400;
+    // Car.prototype.lang = 4900;
+    // Car.prototype.carName = "BMW";
+    // function Car(color, owner) {
+    //var this = {
+    //__proto__ : Car.prototype
+    //};
+    // 	this.owner = owner;
+    // 	this.color = color;
+    // }
+    // var car = new Car('red', 'jicheng');
+    // var car1 = new Car('green', 'laodeng');
+    // 原型链：(连接点是__proto__，Object.prototype是终点)
+    // 绝大多数对象的最终都会继承自Object.prototype
+    // Object.create(prototype,definedProperty);
+
+    // 一旦通过 var 操作配置的window属性叫做不可配置属性
+    // 不可配置的属性 delete 不掉
+
+
+
+
+    // 包装类
+    // 引用值和原始值存储方式不同
+    // 原始值没有属性和方法，引用值有
+    // var str = "abc";
+    // console.log(str.length);
+    // 隐式类型转换，执行了以下操作：
+    // console.log(new String(str).length);
+
+    // var num = 123;
+    // num.abc = "abc";
+    // 执行了以下操作：
+    // new Number(num).abc = "abc"; --> delete
+    // console.log(num.abc);
+    // new Number(num).abc = undefined;
+    // 这样的过程就叫做包装类
+
+
+
+
+
+    // 防止污染全局变量
+        // 1、命名空间
+        // eg：org = {
+            //     department1 : {
+            //         jicheng : { name : 'sunny' },
+            //         xuming : {}
+            //     }
+            //     department2 : {
+            //         zhangsan : {},
+            //         lisi : {}
+            //     }
+            // }
+            // var jicheng = org.department.jicheng;
+            // jicheng.name
+        // 
+        // 2、闭包(使变量私有化)
+        // eg：var init = (function () {
+            //     var name = 'walker';
+            //     function callName() {
+            //         console.log(name);
+            //     }
+            //     return function () {
+            //         callName();
+            //     }
+            // }());
+            // init();
+
+
+
+
+
+    // 继承
+    // 
+    // 
+    // 共有原型(共享原型)
+    // 
+    // Father.prototype.lastName = "deng";
+    // function Father() {
+    // 
+    // }
+    // 
+    // function Son() {
+    // 
+    // }
+    // 
+    // Son.prototype = Father.prototype;
+    // 当Son只想在自己的原型链上增加一个属性时，因为Son.prototype和Father.prototype存的是地址，所以...  使用以下的圣杯模式
+    // 
+    // 
+    // 圣杯模式
+    // var inherit = (function () {
+    // 	var F = function () {};
+    // 	return function (Target, Origin) {
+    // 		F.prototype = Origin.prototype;
+    // 		Target.prototype = new F();
+    // 		Target.prototype.constructor = Target;
+    // 		Target.prototype.uber = Origin.prototype;
+    // 	}
+    // }());
+    // function Son() {};
+    // function Father() {};
+    // inherit(Son, Father);
+    // var son = new Son();
+    // var father = new Father();
+
+    // var student = new Student('zhangsan', 20, 'male');
+
+
+
+
+    
+    // parseInt(string, radix);      将string看成是radix进制的数
+    // sth.toString(radix);          将sth转换为radix进制的数
+
+
+    //var n = parseInt(window.prompt('input'));
+    //var acount = 1;
+    //计算2的n次幂
+    /*for (var i = 0; i < n; i++) {
+        acount *= 2;
+    }
+    document.write(acount);*/
+
+
+
+
+
+
+    //计算n的阶乘
+    /*for (var i = 1; i <= n; i++) {
+        acount *= i;
+    }
+    document.write(acount);*/
+
+
+
+
+    //计算斐波那契数列，如 1 1 2 3 5 8等
+    /*var num1 = 1,
+        num2 = 1,
+        sum = 1;
+    for (var i = 1; i < n; i++) {
+        sum = num1 + num2;
+        num1 = num2;
+        num2 = sum;
+    }
+    document.write(sum);*/
+
+
+
+    //输入三个正整数，输出时反向输出
+    /*var num1 = parseInt(n / 100),
+        num2 = parseInt(n / 10) % 10,
+        num3 = n % 10;
+    document.write(num3 * 100 + num2 * 10 + num1);*/
+
+
+    //2 > 1 && alert('hello');
+
+
+
+
+    // 计算字符串的长度
+    // function strLength(str) {
+    // 	var myStr = str;
+    // 	var strLen = 0;
+    // 	for(var i=0;i<myStr.length;i++) {
+    // 		if (myStr.charCodeAt(i) > 255) {
+    // 			strLen += 2;
+    // 		}else{
+    // 			strLen ++;
+    // 		}
+    // 		console.log(myStr.charCodeAt(i));
+    // 	}
+    // 	console.log(strLen);
+    // }
+    // var str = window.prompt('Please input string');
+    // strLength(str);
+    </script>
+    <style type="text/css">
+        /*使用border制作三角形*/
+    	div {
+    		width: 0px;
+    		height: 0px;
+    		border: 200px solid #f40;
+    		border-left-color: transparent;
+    		border-bottom-color: transparent;
+			border-right-color: transparent;
+
+    	}
+    </style>
+</head>
+
+<body>
+	<div></div>
+</body>
+
+</html>

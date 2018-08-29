@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    
+        // 1、安装node.js  ^6.11.5
+        // 2、安装webpack 4
+            // 选择一个非中文的文件夹路径，打开命令行窗口cmd
+            // 输入命令安装全局webpack：npm intall webpack -g
+            // 同时安装局部webpack：npm install webpack --save-dev
+            // 全局webpack-cli：npm install webpack-cli -g
+            // 局部webpack-cli：npm install webpack-cli --save-dev
+            // npm init  初始化
+        // 如果已有package.json文件直接npm install安装依赖
+        // 3、编写配置文件 webpack.config.js
+            // entry: 属性值可以是字符串或对象 页面入口文件配置
+                // entry: './src/js/entry.js'   单文件输入
+                // entry: {   多文件输入
+                    // index: './src/js/index.js',
+                    // demo: './src/js/demo.js'
+                // }
+            // output：对应输出项配置
+                // output: {
+                    // path: __dirname + '/out',
+                    // filename: 'index.js'  单文件输出
+                    // filename: '[name].bundle.js'  多文件输出  name相当于entry对象中的属性名
+                    // publicPath: ''
+                // }
+            // mudle: {
+                // rules: [
+                    // {test: /正则/, use: ['url-loader', 'file-loader']}   use数组中的值从后往前解析
+                // ]
+            // }
+            // plugins首先在前面require一个插件
+            // var uglifyjs = require('uglifyjs');
+            // plugins: [
+                // new uglifyjs();
+            // ]
+            // mode: development/production
+        // 4、使用webpack打包或webpack -w实时监控
+
+        // 使用webpack-dev-server时，打包的文件保存在内存中，不会输出到output文件夹中。publicPath要配置服务器上的路径即可解决
+
+
+        // gulp API
+        // gulp.task()  启动任务
+        // gulp.src()   读文件
+        // gulp.dest()  写文件
+        // gulp.watch() 监听
+        // 
+        // gulp plugins
+        // gulp-htmlclean  html代码压缩
+        //     使用：htmlclean()
+        // gulp-imagemin   图片压缩
+        //     使用：imagemin()
+        // gulp-uglify     js压缩
+        //     使用：uglify()
+        // gulp-strip-debug  去除js调试语句
+        //     使用：stripDebug()
+        // gulp-concat   js文件连接（拼接）
+        //     使用：concat("合成的文件名")
+        // gulp-less    less转换css
+        //     使用：less()
+        // gulp-postcss  同时执行css多个插件
+        //     使用：postcss([autoprefixer(), cssnano()])
+        // autoprefixer  自动添加浏览器前缀
+        // cssnano  压缩css代码
+
+        // cli命令行配置当前环境  export NODE_ENV=development
+        // process.env.NODE_ENV == 'development'
+
+        // gulp-connect  本地服务器
+        //     使用：connect.server()
+                // connect.server({
+                       // port: 8090,
+                       // livereload: true  自动刷新，设置
+                // })
+                
+                // .pipe(connect.reload())  在html、js、css中添加使用
+    </script>
+</body>
+</html>

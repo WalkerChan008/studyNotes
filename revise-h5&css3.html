@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .demo {
+            width: 200px;
+            height: 200px;
+            background: #555;
+            /* border-radius: 100px 100px 0 0; */
+            border-radius: 99px;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo"></div>
+    <script>
+
+// 主流浏览器chrome、Safari、firefox、opera、ie10以上 开始全面支持CSS3
+// 编写CSS3样式时 不同浏览器可能需要不同的前缀(caniuse.com查看兼容)
+//  -webkit-    chrome safari
+//  -moz-       firefox
+//  -ms-        IE
+//  -o-         opera
+// 
+// border-radius  --  圆角
+// border-radius: 20px;
+//      is equivalent to:
+// border-radius: 20px 20px 20px 20px;
+//      is equivalent to:
+// border-top-left-radius: 20px;
+// border-top-right-radius: 20px;
+// border-bottom-right-radius: 20px;
+// border-bottom-left-radius: 20px;
+//      is equivalent to:
+// border-top-left-radius: 20px 20px;
+// border-top-right-radius: 20px 20px;
+// border-bottom-right-radius: 20px 20px;
+// border-bottom-left-radius: 20px 20px;
+// 
+// border-radius: 1px 2px 1px 2px / 2px 1px 2px 1px;
+// 此种写法规范 了解即可
+// 
+// box-shadow  --  盒子阴影
+// box-shadow: X轴偏移量 Y轴偏移量 [阴影模糊半径] [阴影扩展半径] [阴影颜色] [投影方式]
+// []内为选填  投影方式：默认不能写 inset外嵌
+//  eg: .box_shadow {
+//          box-shadow: 4px 2px 6px 7px #333 inset;
+//      }
+// 同一盒子 可以同时加多个阴影 阴影之间用","隔开
+//  eg: .box_shadow {
+//          box-shadow: 4px 2px 6px #ddd, -4px -2px 6px #fff inset;
+//      }
+// 
+// text-shadow  -- 文本阴影
+// text-shadow: X-Offset Y-Offset blur color;
+// X-Offset: 表示阴影的水平偏移距离 值为正向右偏移 反之向左偏移
+// Y-Offset: 表示阴影的垂直偏移距离 值为正向下偏移 反之向上偏移
+// blur: 阴影的模糊程度 值不能为负 值越大 阴影越模糊 单只越清晰 如不需要阴影模糊可设为0
+// color: 阴影的颜色 可以使用rgba()
+//  eg: text-shadow: 0 1px 2px #ccc;
+// 
+// 注意：带有shadow的是性能杀手 可以用 但是适量使用
+// 
+// 渐变的背景颜色 gradient(background: xx-gradient)
+// 线性渐变(linear - to)
+//     linear-gradient([direction], color [percent], color [percent], ...)
+//     [] 为选填
+//     direction角度的单位为"deg" 也可是用 to top, to left, to top left
+// 径向渐变(radial - at)
+//     radial-gradient(shape at position, color [percent], color, ...)
+//     shape: 放射的形状 可以为圆形circle 椭圆ellipse
+//     position: 圆心位置 一共两个值(如只有一个值 第二个默认center)
+//               值类型有: % px 方位值(left,top,...) 
+//               X轴主半径 Y轴次半径
+// 
+// 
+// 文字边界换行 word-wrap: narmal|break-word;
+// font-face
+//     @font-face {
+//         font-family: "myFirstFont";
+//         src: url('Sansation_Light.ttf'),
+//              url('Sansation_Light.eot') format('eot');
+//     }
+//     p {
+//         font-family: 'myFirstFont';
+//     }
+// format: 自定义字体的格式 主要用于帮助浏览器识别浏览器对@font-face的兼容问题
+//         这里涉及到一个字体format的问题 因不同浏览器对字体格式支持不一致
+//         浏览器自身也无法通过路径后缀来判断字体
+// 兼容写法:
+//     @font-face {
+// 	       font-family: 'diyfont';
+// 	       src: url('diyfont.eot'); /* IE9+ */
+// 	       src: url('diyfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+// 		        url('diyfont.woff') format('woff'), /* chrome、firefox */
+// 		        url('diyfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+// 		        url('diyfont.svg#fontname') format('svg'); /* iOS 4.1- */
+// }
+// 网址：http://www.w3cplus.com/content/css3-font-face
+// 
+// border-image  --  边框应用背景图片
+//     border-image: url(xxx.png) number stretch|repeat|round
+//     stretch  拉伸 有多长拉多长
+//     repeat   和4角上 同等大小图片进行平铺  当边框中间区域长度不是4角图片大小的整数倍时 会被切割
+//     round    铺满 4角上的图片 进行拉伸平铺不会被切割
+//     number   截取指定图片四周的宽度作为border的背景填充部分(截图可按border-width大小伸缩)
+//              number为一个数字时是复合写法
+// 左后一个属性为border-image的展示策略
+//  eg: border-image: url('/border.png') 27 round;
+// 
+// background-origin 背景图片起始位置
+// background-origin: border-box|padding-box|content-box;
+//     参数分别表示显示背景图片的区域: 边框 内边距(默认) 内容区域
+// 
+// background-clip  --  剪裁背景
+// background-clip: border-box|padding-box|content-box|no-clip;
+//     参数分别表示为: 边框 内边距 内容区域向外   剪裁背景
+//     no-clip表示不剪裁 和参数border-box显示同样效果
+//     默认值为 border-box
+// 
+// webkit独有属性
+// background-clip: text;
+// 从背景内容的形状(如形状)作为剪裁区域向外剪裁 如此即可实现使用背景作为填充色之类的遮罩效果
+// 必须配合text-fill-color属性
+// -webkit-background-clip: text;
+// -webkit-text-fill-color: transparent;
+// text-fill-color: -webkit-background-clip;
+// -webkit-background-clip: text;
+// 
+// background-size  -- 背景图片尺寸
+// background-size: auto | px/em | % | cover | contain |
+//     auto: 默认值 不改变背景图片的原始高度和宽度
+//     cover: 用一张图片铺满整个背景 如比例不符 则截断图片
+//     contain: 尽量让背景内 存一整张图片
+// 
+// background-position  --  定位背景图片
+// background-position: top left | top center | x% y% | ...
+//     只填一个值 第二个默认为center
+// 
+// CSS3选择器
+//     属性选择器
+//     E[attr^="val"]{} E[attr$="val"]{} E[attr*="val"]
+//     选择E元素 且E定义了属性attr '^'其属性值以"val"开头的任何字符串
+//                                '$'以"val"结尾
+//                                '*'属性值包含"val" 位置不限
+//     伪类选择器
+// 1   :root === html  根标签选择器等同于html元素选择器 推荐使用:root
+// 2   :not  否定选择器 用法与jQuery中的not类似
+//         eg: div:not([class="demo"]) { color: red; }
+//         意思是除了class为demo的div以外 所有div的color都变红
+// 3   :empty 空标签选择器 用来选择没有内容的元素 不再文档树中的元素
+//            这里的没有内容指一点内容都没有 哪怕是一个空格
+// 4   :target 目标元素选择器 用来匹配锚点元素(被location.hash选中)
+//             选择器可用于选取当前活动的目标元素
+// 5   :first-child 第一个子元素
+//     :last-child 最后一个子元素
+//     :nth-child(n){} 第n个子元素 n代表变量自然数
+//     :nth-last-child(n){} 从后往前数
+//     以上四个选择器均有弊端 如果当前位置元素不是前面所修饰的元素则无效
+//     注: 其父元素的第N个子元素 不论元素的类型
+// 6   :first-of-type 第一个子元素(第一个是xx类型的子元素)
+//     :last-of-type 最后一个子元素
+//     :nth-of-type(n){} 第n个子元素 n代表变量自然数
+//     :nth-last-of-type(n){} 从后往前数
+//     此种选择器限制类类型 在所修饰元素的类型下选择特定位置的元素
+// 7   :only-child 唯一子元素选择器
+//     该子元素不能有兄弟元素 它的父元素只有一个直接子元素
+//     注: 选择的元素是独生子子元素 而非该子元素的父元素
+//     only-of-type
+//     该子元素在兄弟节点中是此类元素的唯一一个
+// 8   :enabled 可用的元素
+//     :disabled 不可用的元素
+//     在表单元素中有可用("enabled")和不可用("disabled")状态
+// 9   :checked 选择框被选中状态
+//     checkbox radio的一些默认状态不可用属性进行改变 如边框颜色
+// 10  :read-only 选中只读元素
+//     eg: <input type="text" readonly="readonly" />
+//     :read-write 选中可读写元素
+//     eg: <input type="text" />
+// 
+//     伪元素选择器
+//     ::first-letter  选择文本中的第一个字符
+//     ::first-line    选择文本中的第一行
+//     ::before ::after
+//     ::selection     选择用来匹配突出显示的文本(用鼠标选择文本的时候)
+//     在浏览器默认情况下 鼠标选择网页文本是以"蓝色的背景 白色的字体"显示
+//         属性: user-select: none;  文本不能选中
+//         注: firefox必须加-moz-   -moz-::selection
+// 
+//     条件选择器
+//     E > F 直接子元素选择器
+//     E + F 后面紧挨着的兄弟节点
+//     E ~ F 后面的兄弟节点
+// 
+// 高级动画
+//     transform 实现元素的形状 角度 位置等变话
+//     值: 
+//        rotate(x, y, z) 以x/y/z为轴进行旋转 写一个参数时默认为z
+//        rotateX() rotateY() rotateZ()
+//        rotate3d(x, y, z, angle) 以x/y/z(矢量值)三个方向的合力为轴 旋转angle度
+//        
+//        scale() 以x/y轴进行缩放
+//        scale(x, y) 接收两个值 如果第二参数未填 则第二参数使用第一参数的值
+//        scaleX() scaleY() 值为数字 表示倍数(无需任何单位)
+//        scaleZ()
+//        scale3d(x, y, z)
+// 
+//        skew() 对元素进行倾斜扭曲
+//        skew(x, y) 接收两个值 x对应X轴 y对应Y轴 如第二参数未填 默认为0
+//        skewX() skewY()
+// 
+//        translate() 可以移动距离 相对于自身位置
+//        translate(x, [y]) 接收两个值 x相对自身width y相对自身height 如第二参数未填 默认为0
+//        translateX() translateY() translateZ() translate3d(x, y, z)
+// 
+//     transform-origin 变换原点
+//        任何一个元素都有一个中心点 默认情况中心点为X轴和Y轴的50%(center)处
+//        值: 百分比; top right bottom left center 的一个或两个组合关键字
+//        top = top center = center top; left = left center = ...
+// 
+//     transition 过渡动画
+//        transition 是CSS3的一个复合属性 主要包括以下的子属性
+//        transition-property 过渡或动态模拟的css属性(如top width等px)
+//        transition-duration 过渡所需要的时间(1s/1000ms)
+//        transition-timing-function 过渡函数 ，默认ease
+//             linear 匀速
+//             ease 以慢开始 然后变快 最后以慢速结束
+//             ease-in 以慢速开始
+//             ease-out 以慢速结束
+//             ease-in-out 以慢速开始和结束
+//             cubic-bezier(n, n, n, n) 值为0至1之间的数值
+//        transition-delay 开始出现的延迟时间(先延迟再动画) 
+// 
+//     animation 动画铺垫
+//        动画关键帧 @keyframes
+//          animation动画会按照keyframes关键帧里面指定的帧状态而过渡执行
+//          0% - 100% 代表动画的时间过渡
+//          @keyframes move {
+//              0% {}
+//              50% {}
+//              100% {}
+//          }
+//          帧频里面如果有0%和100%两个关键帧 可以用from to代替
+//        animation是CSS3的复合属性 主要包括以下子属性
+//          animation-name 此属性为执行动画的keyframes名
+//          animation-duration 此属性为动画执行时间
+//          animation-timing-function 指定过渡函数速率
+//          animation-delay 执行延迟时间
+//          animation-direction 主要用来设置动画播放方向
+//            值: 
+//              normal 默认值 动画按正常播放
+//              reverse 动画反向播放
+//              alternate 动画在奇数次正向播放 偶数次反向播放
+//              alternate-reverse 奇数反向 偶数正向
+//          animation-iteration-count 主要用于定义动画播放次数
+//            值:
+//              n 播放次数
+//              infinite 无限次
+//          animation-play-state 主要用来控制元素动画的播放状态
+//            值:
+//              running 播放
+//              paused 暂停
+//          animation-fill-mode 定义在动画开始之前和结束之前的操作
+//            值:
+//              none 默认值 动画将按预期进行和结束 动画完成其最后一帧时 会反转到初始帧处
+//              forwards 动画结束后继续应用最后关键帧的位置
+//              backwards 在元素应用动画样式时迅速应用动画初始帧(结合延迟1s来看)
+//              both 元素动画同时具有forwards和backwards效果
+// 
+// 多列布局 columns
+//     columns: [column-width] [column-count];
+//         cloumn-width: 指每一列的宽度 根据容器宽度自适应(最小宽度)
+//         cloumn-count: 指规定的列数 唯一精准的是列数
+//         eg: columns: 300px 3;  满足大于等于300px情况下再尽量生成3列
+//         注: 不要两个一起使用 会乱
+//     column-gap: 设置列与列之间的宽度 直接用数值表示
+//                 如果没有显示设置column-gap值时
+//                 其大小会根据浏览器的font-size来定
+//     column-rule: 不占任何空间位置 在列与列之间改变其宽度不会改变任何列的位置
+//         column-rule-width: 类似于border-width 用来定义列边框的宽度
+//                            默认值"medium" 接受任意浮点数 不接收负值
+//                            可以使用关键词 medium thick thin
+//         column-rule-style: 类似于border-style 用来定义列边框样式
+//                            默认值"none" 属性值与border-style相同
+//                            包括none hidden dotted dashed solid
+//                             double groove ridge inset outset
+//         column-rule-color: 颜色 类似于border-color属性
+//     column-span: 1/all 设置多列布局元素内的子元素 可以跨列 类似标题效果
+//                  即一个新闻标题要横跨所有内容列
+//                  注: 此属性要在子元素上设置
+//                            
+// 盒模型
+//     W3C标准盒模型
+//         element空间高度(盒子) = width + padding + border
+//              width内容高度 width不包括padding和border
+//     IE6混杂模式盒模型
+//         内容高度(盒子) = width - padding - border
+//              设置width的数值就是element的空间高度 width包含padding和border
+//              box-sizing: border-box/content-box
+//              content-box为W3C标准盒子 border-box为IE6混杂模式盒子
+// 
+// 弹性盒子 display: flex
+// 设置display: flex的父元素称为 容器   其子元素称为 项目 
+//     flex为复合属性 必须配合父元素display: flex;使用
+//         flex-grow: 放大比例 默认值0(倍数)
+//              根据所设置的比例分配盒子所剩的空间
+//              拓展: 左右两栏布局 
+//              flex-grow: number number为0 1 2 3 ...
+//         flex-shrink: 缩小比例 默认值1(倍数)
+//              将多出盒子的部分按照比例的大小砍掉相应大小 比例越大 被砍的越大
+//         flex-basis: 伸缩基准值 同width(px)
+//              项目占据主轴的空间 该属性设置元素的宽度或高度
+//              如元素上同时出现了width和flex-basis 后者会覆盖前者
+//              子元素宽度尽可能按照basis来 如基准值相加大于容器宽度 那由以下公式扥配宽度给子元素
+//              (flex-basis/(flex-basis相加)) * 容器高度
+//         flex: 是flex-grow flex-shrink flex-basis的简写
+//         order: 排列顺序 默认值0(数字)
+//              number定义项目的排列顺序 数值越小 排列越靠前 可为负值
+//         align-self: 单个项目对齐方式 默认auto
+//              允许单个项目有与其他项目不一样的对齐方式 可覆盖align-items属性
+//              默认继承父元素的align-items 如果没有父级 则等同于stretch
+//              值: auto flex-start flex-end center baseline stretch
+// 以下属性设置在容器上
+//     flex-direction 决定主轴的方向
+//          值: row默认值 主轴为水平方向 起点在左端
+//              row-reverse 主轴为水平方向 起点在右端
+//              column 主轴为垂直方向 起点在上沿
+//              column-reverse 主轴为垂直方向 起点在下沿
+//     flex-wrap 是否换行
+//          默认情况下 项目都在一条线(轴线)上 flex-wrap属性定义如一条轴线排不下如何换行
+//          值: nowrap默认值 不换行
+//              wrap 换行 第一行在上方
+//              wrap-reverse 换行 第一行在下方
+//     flex-flow flex-direction和flex-wrap的简写
+//          默认值row nowrap
+//     justify-content 项目在主轴上的对齐方式
+//          值: flex-start默认值 左对齐
+//              flex-end 右对齐
+//              center 居中
+//              space-between 两端对齐 项目之间的间隔都相等
+//              space-around 每个项目两侧的间隔相等 项目之间的间隔比项目与边框的间距大一倍
+//     align-items 在侧轴上如何对齐
+//          值: flex-start 侧轴(交叉轴)的起点对齐
+//              flex-end 交叉轴的终点对齐
+//              center 交叉轴的中点对齐
+//              baseline 项目的第一行文字的基线对齐
+//              stretch默认值 项目未设置高度或设为auto 将占满整个容器高度
+//     align-content多根轴线的对齐方式 如项目只有一根轴 该属性不起作用
+//          值: flex-start 与交叉轴的起点对齐
+//              flex-end 与交叉轴的终点对齐
+//              center 与交叉轴的中点对齐
+//              space-between 与交叉轴两端对齐 轴线之间的间隔平均分布
+//              space-around 每根轴线两侧的间隔都相等 轴线之间的间隔比轴线与边框的间隔大一倍
+//              stretch默认值 轴线占满整个交叉轴
+//     
+// transparent 透明色颜色值
+// 
+// 模拟移动端的meta
+// <meta name="viewport" content="width=device-width,
+//                                minimum-scale=1.0,
+//                                maximum-scale=1.0,
+//                                user-scalable=no"
+// 
+// 媒体查询
+// 定义: 是向不同设备提供不同样式的一种方式 为每种类型的用户提供了最佳的体验
+// css2: media type
+//     媒体类型
+//         类型         解释
+//         all         所有设备
+//         braille     盲文
+//         embossed    盲文打印
+//         handheld    手持设备
+//         print       文档打印或打印预览模式
+//         projection  项目演示 比如幻灯
+//         screen      彩色电脑屏幕
+//         speech      演讲
+//         tty         固定字母间距的网格的媒体 比如电传打字机
+//         tv          电视
+// css3: media query
+//     media query是css3对media type的增强 
+//     media query = media type + css属性(媒体特性Media features)
+//                   判断条件   +  符合条件的样式规则
+//     媒体特性
+//      属性          值              Min/Max            描述
+//      color         整数              yes              每种色彩的字节数
+//      ...           ...               ...              ...        
+// 媒体查询的引用方式
+//     link
+//      eg: <link rel="stylesheet" media="screen and (max-width: 800px)" href="index.css" />
+//     @import
+//     css3新增的@media
+//      合并多个媒体属性and
+//      eg: <style>
+//              @media screen and (max-width: 800px) and (min-width: 600px) {
+//                  .demo {
+//                      display: none
+//                  }
+//              }
+//          </style>
+//      指定备用功能","
+//          @media screen and (min-width: 769px), print and (min-width: 6in)
+//          没有or关键字可用于指定备用的媒体功能。相反 可以将备用功能以逗号分割列表的形式列出
+//          这会将样式应用到宽度超过769px的屏幕或使用至少6英寸宽的纸张的打印设备
+//      指定否定条件not(必须位于声明的开头)
+//          @media not screen and (monochrome)
+//          要指定否定条件 可以在媒体声明中添加关键字not 不能再单个条件前使用not
+//          它会否定整个声明 上面示例应用于除单色屏幕外的所有设备
+//      向早期浏览器隐藏媒体查询only(必须位于声明的开头)
+//          media="screen and (min-width: 401px) and (max-width: 600px)"
+//              早期浏览器会解释为media="screen"
+//              将样式应用于所有屏幕设备
+//              即使它不知道媒体查询的含义
+//          media="only screen and (min-width: 401px) and (max-width: 600px)"
+//              早期浏览器会解释为media="only"
+//              因为没有only媒体查询 所以样式表会被忽略
+// 易混淆的宽度
+//      device-width/device-height
+//          是设备宽度/高度 (设备出厂前就已经设置好的)
+//      width/height
+//          使用documentElement.clientWidth/Height 即viewport的值
+// 
+// 浏览器渲染原理
+//     1 处理HTML 生成DOM树
+//          根节点就是常用的document对象(<html>tag)
+//          节点还包括js动态生成的
+//     2 处理CSS 生成CSSDOM树
+//          把所有样式解析成样式结构体
+//          样式主要包括css和浏览器的默认样式设置
+//          解析过程中会去掉浏览器不能识别的样式
+//     3 将两树合并成render树
+//          render树不包含display:none 无样式的head节点
+//          这些节点不会用于呈现 也不影响呈现
+//          注: visibility:hidden; opacity:0;还会包含到render树
+//              因为其会影响布局(layout) 会占有空间
+//     4 对render树进行布局计算
+//          布局阶段的输出结果称为"盒模型"
+//          精确表达窗口中每个元素的位置和大小(节点=box)
+//          所有相对单位都被转换成屏幕的绝对像素位置
+//     5 将render树中的每一个节点绘制到屏幕上
+//          将信息渲染为屏幕上每个真实的像素点
+//          这阶段称为"绘制"或"栅格化"(rasterizing)
+// 
+// 重排 重绘(影响性能)
+//     1 布局阶段需要计算他们在当前设备中的准确的位置和尺寸
+//       该阶段称为"回流"(reflow也叫重新布局)
+//       每个页面至少需要一次回流 就是在页面第一次加载时
+//     2 重绘(repaints)当render树中一些元素需要更新属性
+//       而这些属性只是影响元素的外观 风格 而不会影响布局
+//     chrome中的饼状图
+//       蓝色: 网络通信和HTML解析
+//       黄色: js执行
+//       紫色: 样式计算和布局 即重排
+//       绿色: 重绘
+// 触发重排的方法
+//      以下这些属性和方法需要返回最新的布局信息 重新计算渲染树
+//      就会造成回流 触发重排以返回正确的值 
+//      建议将他们合并到一起操作，可以减少回流的次数
+//      这些属性包括：offsetTop offsetLeft offsetWidth 
+//                   offsetHeight scrollTop scrollLeft 
+//                   scrollWidth scrollHeight clientTop
+//                   clientLeft clientWidth clientHeight 
+//                   getComputedStyle() currentStyle()
+// 提高网页性能 就是要降低"重排"和"重绘"的频率和成本 尽量少触发重新渲染
+// DOM变动和样式变动 都会触发重新渲染 但是 浏览器已经很智能了 
+// 会尽量把所有的变动集中在一起 排成一个队列 然后一次性执行 尽量避免多次重新渲染
+// eg: div.style.color = 'red';
+//     div.style.background = 'yellow';
+//     div.style.left = '10px';
+//     div.style.width = '20px';
+//      但是浏览器只会触发一次重排和重绘
+// 理论上的解决优化办法
+//     1 DOM的多个读操作(写操作)应方一起 不要两个读操作之间加入一个写操作
+//     2 离线操作DOM 如使用隐藏元素 document.createDocumentFragment() cloneNode()
+//     3 修改样式时添加类名 或一次性添加到dom.style.xx上
+// 
+// 3d动画
+//     transform-style: flat | preserve-3d
+//         设置在父级元素中 高于任何嵌套的变形元素
+//         不能防止子元素溢出设置overflow: hidden;
+//         否则会导致preserve-3d失效
+//     perspective 景深
+//         可理解为成人距离显示器的距离
+//         值越大 效果越差  越小效果越好
+//         perspective的值要大于3d物体的值
+//         eg: perspective: 600px; 默认值none
+//             物体距离人眼的距离是600px
+//     perspective-origin: 50% 50%; 默认值
+//         值: top left right bottom等
+//     激活3d空间    
+//         perspective: 600px; 父元素(舞台元素)
+//         transform: perspective(600px); 子元素(变形元素)
+//         注: 当有多个变形元素时 第一种只有一个透视点
+//             第二种每一个变形元素都有一个透视点
+//     backface-visibility: visible默认 | hidden
+//         在元素运动过程中 能否展示元素背面
+//     3D旋转 元素在转 坐标轴也在转
+// 
+// CSS3动画性能优化
+//     1 尽可能多的利用硬件能力 如使用3D变形来开启GPU加速
+//       eg: transform: translate3d(0, 0, 0);
+//       注: 如动画过程有闪烁(通常发生在动画开始时) 可以尝试下面的hack
+//           backface-visibility: hidden;
+//           perspective: 1000;
+//       通过translate3d的动画流畅度会明显优于使用left属性
+//       注: 3D变形会消耗跟多的内存与功耗 确实有性能问题时才使用 兼在权衡
+//     2 尽可能少的使用box-shadow与gradient(渐变) 这两个都是页面性能杀手 能避免尽量避免
+//     3 尽可能让动画元素不在文档流中 以减少重排
+//          position: absolute | fixed;
+//     4 优化 DOM reflow
+// 
+// 判断鼠标进入方向 方向反馈
+// (Math.round((Math.atan2(y, x) * (180/Math.PI) + 180) / 90) + 3) % 4
+
+
+// HTML5
+// 
+// Canvas应用场景
+//     游戏 图表 动画
+//     codepen.io  (HTML5动画)
+// 使用canvas
+//     1. 添加canvas
+//        <canvas width=500 height=500></canvas>
+//     2. 获得canvas元素
+//        var canvas = document.getElementById('myCanvas');
+//     3. 获得canvas上下文
+//        var ctx = canvas.getContext('2d');
+// 两个对象
+//     1.元素对象(canvas元素)和上下文对象(通过getContext('2d')方法获取到的CanvasRenderingContext2D对象)
+//     2.元素对象相当于画布 上下文对象相当于画笔 操作时基于上下文对象的
+// 线段
+//     1. ctx.moveTo(x, y); 将起点移动到x y坐标点
+//     2. ctx.lineTo(x, y); 从当前点绘制直线到x y点
+//     3. ctx.stroke(); 描边
+//     4. ctx.lineWidth = 20; 设置线段宽度
+//     5. ctx.closePath(); 闭合当前路径(和回到起始点的区别)
+//     6. ctx.fill(); 填充
+//   重点:
+//     1. fill和stroke方法都是作用在当前的所有子路径
+//     2. 完成一条路径后要重新开始另一条路径时必须使用beginPath()方法
+//        beginPath开始子路径的一个新的集合
+// 矩形
+//     1. ctx.rect(x, y, dx, dy);
+//     2. ctx.fillRect(x, y, dx, dy);
+//     3. ctx.strokeRect(x, y, w, h);
+//   注: strokeRect(x, y, dx, dy) fillRect() 会自动开启一条新的路径
+//   擦除当前区域
+//     1. ctx.clearRect(x, y, dx, dy);
+//     2. 实现矩形落地动画
+// 弧形
+//     1. arc(x, y, r, 起始弧度, 结束弧度, 弧形的方向)
+//     2. 角以弧度计算 0顺时针 1逆时针
+// 圆角
+//     1. ctx.arcTo(x1, y1, x2, y2, r)
+//     2. 绘制的弧线与当前点和x1 y1连线  x1 y1和x2 y2连线都相切
+// 贝塞尔曲线
+//     1. quadraticCurveTo(x1, y1, ex, ey) 二次贝塞尔曲线
+//        x1, y1 控制点
+//        ex, ey 结束点
+//     2. bezierCurveTo(x1, y1, x2, y2, ex, ey) 三次贝塞尔曲线
+//        x1, y1  x2, y2 控制点
+//        ex, ey 结束点 
+// 坐标轴转换
+//     1. translate(dx, dy) 重新映射画布上的(0, 0)位置
+//     2. scale(sx, sy) 缩放当前绘图
+//     3. rotate(Math.PI) 旋转当前的绘图
+//     4. save() 保存当前图像状态到栈中
+//        restore() 从栈中弹出存储的图形状态并恢复
+//     5. setTransform(a, b, c, d, e, f) 先重置在变换
+//        参数: 水平旋转 水平倾斜 垂直倾斜 垂直缩放 水平移动 垂直移动
+//     6. transform(a, b, c, d, e, f) 在之前的基础上变换
+// 填充图案
+//     1. createPattern(image, "repeat|repeat-x|repeat-y|no-repeat");
+//     2. img元素(Image对象) canvas元素 video元素(有图形的)
+// 渐变
+//     1. createLinearGradient(x1, y1, x2, y2); 线性渐变
+//        必须在填充渐变的区域里定义渐变 否则没有效果
+//     2. createRadialGradient(x1, y1, r1, x2, y2, r2); 径向渐变
+//     3. bg.addColorStop(p, color);
+// 阴影
+//     1. ctx.shadowColor = '';
+//     2. ctx.shadowOffsetX = num;
+//     3. ctx.shadowOffsetY = num;
+//     4. ctx.shadowBlur = num;
+//        注: num数字 这里的阴影偏移量不受坐标系变换的影响
+// 文本
+//     1. fillText();
+//     2. strokeText();
+//     3. measureText('Hello world'); 了解即可
+//        eg: ctx.fillStyle = 'green'; 
+//            ctx.font = '50px sans-serif';
+//            ctx.fillText('hello world', 100, 100);
+// 线段样式
+//     1. lineCap 属性值有: butt square round
+//     2. lineJoin 属性值有: miter round bevel
+//     3. ctx.miterLimit
+//        当lineJoin是miter时 用于控制斜接部分的长度 如果斜接长度超过miterLimit的值 变成bevel
+//        eg: ctx.lineWidth = 20;
+//            ctx.lineJoin = 'miter';
+//            ctx.miterLimit = 20;
+//            ctx.moveTo(100, 100);
+//            ctx.lineTo(200, 100);
+//            ctx.lineTo(100, 110);
+//            ctx.closePath();
+//            ctx.stroke();
+// 剪裁
+//     ctx.clip(); 当前路径外的区域不再绘制 可先save() 后restore()
+// 合成
+//     1. ctx.globalCompositeOperation = ''; 新像素与原像素合并方式
+//     2. 11种值 默认source-over    w3c标准
+//        source-over|-atop|-in|-out
+//        destination-over|-atop|-in|-out
+//        copy lighter xor
+//     3. 常用 source-over destination-over copy
+// 全局透明度
+//     ctx.globalAlpha = '0.5';
+// 绘制图片
+//     1. ctx.drawImage(oImg);
+//        第一个参数是oImg(Image, canvas, video) 注: onload
+//     2. 3个参数(oImg, x, y);
+//        x, y起始点坐标
+//     3. 5个参数(oImg, x, y, w, h);
+//        起始点坐标及图片所存在区域的宽高
+//     4. 9个参数(oImg, x1, y1, w1, h1, x2, y2, w2, h2);
+//        前四个为所绘制目标元素的起始点和宽高
+//        后四个为canvas绘制的起始点和大小
+// 将canvas内容导出
+//     1. canvas.toDataURL(); 是canvas自身的方法 不是上下文对象
+//     2. 将canvas的内容抽取成一张图片 base64编码格式
+//        base64 减少网络请求
+//        base64就是图片具体信息 不需要请求服务器
+//        小图推荐使用 大图不推荐
+//        注: 同源策略的限制
+//     3. 将canvas的内容放入img元素里
+// 获取canvas像素信息
+//     1. ctx.getImageData(x, y, dx, dy); //同源策略
+//     2. ctx.createImageData(w, h); 创建新的空白ImageData对象
+//     3. ctx.putImageData(imgData, x, y); 将图像数据放回画布上
+// RGBA值
+//     R - 红色(0-255)
+//     G - 绿色(0-255)
+//     B - 蓝色(0-255)
+//     A - alpha通道(0-255; 0透明 255完全可见)
+// 命中检测
+//     1. ctx.isPointInPath(x, y); 检测是否在区域内 chrome与safari的区别
+//     2. ctx.isPointInStroke(x, y); 检测是否在线上
+//     3. 还可以通过检测当前点的像素值 如果透明 则该点不在路径上
+// 非零绕数准则
+// 解决canvas高分屏模糊问题
+//     在分辨率比较高的屏幕 例如ip6/6s/mac等机器上 因为canvs绘制的是位图 所以会导致模糊
+//     解决方法是根据屏幕分辨率修改canvas样式代码中的宽和高与canvas的width和height属性的比例
+// 
+//  
+// svg(Scalable Vector Graphics)
+// 应用场景
+//     图表 图标icon 动效 矢量图
+// svg的使用
+//     开始 <svg width=500 height=500></svg>
+// 简单形状
+//     1. 直线
+//        <line x1="100" y1="100" x2="200" y2="100"></line>
+//             x1 y1起点坐标    x2 y2终点坐标
+//     2. 矩形
+//        <rect x="50" y="50" width="100" height="100" rx="10"ry="20"></rect>
+//             rx ry圆角设置 相当于border-radius
+//     3. 圆形
+//        <circle r="50" cx="220" cy="100"></circle>
+//             r半径  cx xy圆心坐标
+//     4. 椭圆
+//        <ellipse rx="100" ry="50" cx="100" cy="200"></ellipse>
+//             rx ry短长轴半径  cx cy圆心坐标
+//     5. 折线
+//        <polyline points="60 50, 75 35, 100 50, 125 35"></polyline>
+//             逗号可不写 推荐写
+//     6. 多边形
+//        <polygon points="125 125,130 140,120 140"></polygon>
+//     7. 文本
+//        <text x="125" y="220">hello,world</text>
+//             x y文字元素的起点坐标
+//     样式属性
+//         1. fill 填充
+//         2. stroke 描边
+//         3. stroke-width 描边宽度
+//         4. stroke-opacity/fill-opacity 透明度
+//         5. stroke-linecap: butt/round/square butt默认
+//         6. stroke-linejoin: miter/bevel/round miter默认
+//     8. path元素
+//         M指令和L指令 m指令和l指令
+//             M/m: moveTo    L/l: lineTo
+//             eg: <path d="M 10 10 L 20 10" />
+//         H指令和V指令
+//             H(horizontal)水平 V(vertical)垂直
+//             eg: <path d="M 100 100 H 200 V 200"/>
+//         Z指令
+//             Z闭合路径 Z不区分大小写
+//             eg: <path d="M 100 100 H 200 V 200 z"/>
+//         A指令
+//             圆弧指令 七个参数
+//             rx ry x-axis-rotation large-arc-flag sweep-flag x y
+//             rx ry 圆弧的X轴半径和Y轴半径
+//             x-axis-rotation 圆弧相对X轴的旋转角度 默认顺时针 可以设置负值
+//             large-arc-flag 表示圆弧路径时大圆弧还是小圆弧 1大圆弧
+//             sweep-flag 起点到终点是顺时针还是逆时针 1顺时针 0逆时针
+//             x y终点坐标  绝对或相对
+//             eg: <path d="M 100 100 A 70 120 90 1 1 150 200"></path>
+//         贝塞尔曲线
+//             1. 二次贝塞尔
+//                Q x1 y1, x y
+//                T x y
+//                T是在Q的基础上再添加一个点
+//                Q的最后一个点延伸出去再与T连接
+//             2. 三次贝塞尔曲线
+//                C x1 y1, x2 y2, x y
+//                S x2 y2, x y
+// 
+// 注: path绝对路径 相对于整个svg画布而言
+//     path相对路径 相对于M点而言
+//     自动生成路径 Method Draw 地址: http://editor.method.ac/
+//  
+// svg渐变
+//     1. 线性渐变
+//        eg: <defs>
+//                <linearGradient id="bg1" x1="0" y1="0" x2="0" y2="100%">
+//           	      <stop offset="0%" style="stop-color:rgb(255,255,0);"/>
+//           	      <stop offset="100%" style="stop-color:rgb(255,0,0);"/>
+//                </linearGradient>
+//            </defs>
+//            <rect x="0" y="0" width="500" height="500"style="fill:url(#bg1)"/>
+//     2. 径向渐变
+//         eg: <defs>
+// 	               <radialGradient id="bg2" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+// 		               <stop offset="0%" style="stop-color:green;"/>
+// 		               <stop offset="100%" style="stop-color:red;"/>
+// 	               </radialGradient>
+//             </defs>
+//             <rect x="0" y="0" width="500" height="500" style="fill:url(#bg2)"/>
+// svg滤镜
+//     1. 高斯滤镜
+//         eg: <defs>
+//                 <filter id="Gaussian_Blur">
+//                     <feGaussianBlur in="SourceGraphic" stdDeviation="20"/>
+//                 </filter>
+//             </defs>
+//             <rect x="0" y="0" width="500" height="500" fill=”yellow” style="filter:url(#Gaussian_Blur)"/>
+//     2. 其他滤镜
+//        w3sc1hool查
+// svg路径动画 !重点!
+//     1. stroke-dasharray: 100px
+//        画100像素空100像素  后面还可以继续填参数
+//     2. stroke-dashoffset: 10px
+//        让路径向 左/右 移动10像素 往前缩进10px
+// svg在js中的操作
+//     1. getTotalLength
+//        获取路径总长度
+//     2. getPointAtLength(x)
+//        获取路径上距离起始点距离x长度的点的坐标
+//     注: 严格来说上面两方法只适用于path元素 但各个浏览器实现起来都会有一点区别 例如谷歌浏览器也能获取到line元素的路径长度
+// viewBox
+//     1. <svg width="400" height="300" viewBox="0,0,40,30" ></svg>
+//     2. preserveAspectRatio
+//        xMin xMid xMax -> X轴 左中右对齐
+//        yMin yMid yMax -> Y轴 上中下对齐
+//        meet slice none -> 设置填充方式 
+//        把整个图形撑开 把整个svg都撑满 不填充形变
+//        eg: svg.setAttribute("preserveAspectRatio", "xMinYMin meet");
+// JS生成SVG元素
+//     1. 创建svg元素需要指定命名空间
+//        eg: var char = 'http://www.w3.org/2000/svg',
+//                svg = document.createElementNS(char, 'svg');
+//     2. svg元素对象一般通过调用setAttribute()方法来设定属性值
+
+// 作业 抽风线 loading动态图 仪表盘 签名动画 svg卡通人物
+
+// requestAnimationFrame
+//     1. 页面刷新前执行一次
+//     2. 1000ms 60fps -> 16ms
+//     3. cancelAnimationFrame
+//     4. 用法和setTimeout类似
+//     5. 兼容性
+//
+//     用法: 
+//         requestAnimationFrame(f);
+//         cancelAnimationFrame(id);
+// 
+//     封装兼容性方法
+//         window.requestAnimationFrame = (function () {
+//             return window.requestAnimationFrame ||
+//                    window.webkitRequestAnimationFrame ||
+//                    window.mozRequestAnimationFrame ||
+//                    function (callback) {
+//                         window.setTimeout(callback, 1000/60);
+//                    };
+//         })
+//         window.cancelAnimationFrame = (function () {
+//             return window.cancelAnimationFrame ||
+//                    window.webkitCancelAnimationFrame ||
+//                    window.mozCancelAnimationFrame ||
+//                    function (id) {
+//                         window.clearTimeout(id);
+//                    };
+//         })
+//
+// 客户端存储
+//     1. storage(localStorage sessionStorage)
+//        存储数据
+//          localStorage.name = 'aimee';
+//          localStorage.info = JSON.stringify({"name": "aimee", "company": "duyi"})
+//        取出数据
+//          localStorage.name;
+//          JSON.parse(localStorage.info);
+//        存储有效期
+//          localStorage 永久的 除非手动删除
+//          sessionStorage 临时 窗口关闭就没了
+//        作用域
+//          localStorage 文档源限制(受同源策略影响)
+//          sessionStorage 文档源限制+窗口
+//        API
+//          1. setItem(name, val) 设置属性值
+//          2. getItem(name) 获得属性值
+//          3. removeItem(name) 移除属性
+//          4. clear() 清除所有属性
+
+//     2. cookie
+//        存储信息到用户设备上 数据量较小
+//        navigator.cookieEnabled 检测是否启用了cookie
+//        1. 设置cookie值
+//           document.cookie = "name=aimee"
+//        每次只能设置一个值 因为浏览器会认为后面的键值对是这个cookie的属性
+//        2. 获得cookie值
+//           document.cookie
+//        不建议出现分号 逗号 空格等奇怪的符号
+//        
+//        encodeURIComponent();  编码
+//        decodeURIComponent();  解码
+
+//     cookie和storage的比较
+//        1. 数据的生命周期
+//           Cookie: 一般由服务器生成 可设置失效时间 如果在浏览器端生成Cookie 默认是关闭浏览器后失效
+//           localStorage: 除非被清除 否则永久保存
+//           sessionStorage: 仅在当前会话下有效  关闭页面或浏览器后被清除
+//        2. 存放大小
+//           Cookie: 4K左右
+//           storage: 一般为5MB
+//        3. 与服务器端通信
+//           Cookie: 每次都会携带在HTTP头中 如果使用cookie保存过多数据会带来性能问题
+//           storage: 尽在客户端(即浏览器)中保存 不参与和服务器的通信
+//        4. 易用性
+//           Cookie: 需要程序员自己封装 原生的Cookie接口不友好
+//           storage: 原生接口可以接受 亦可再次封装来对Object和Array有更好的支持
+
+
+// history
+//     1. history.back();
+//     2. history.foward();
+//     3. history.go(n);
+//     SPA(single page web application)
+//    
+//     通过修改hash和hashchange事件来实现历史记录管理
+//     1. pushState
+//        history.pushState(state, title, url); 添加一条历史记录
+//     2. replaceState
+//        history.replaceState(state, title, url); 替换当前的历史记录
+//     参数: 
+//        state: 一个与指定网址相关的状态对象 popstate事件触发时 该对象会传入回调函数中 如果不需要这个对象 此处可以填null
+//        title: 新页面的标题 但是所有浏览器目前都忽略这个值 因此这里可以填null
+//        url: 新的网址 必须与当前页面处在同一个域 浏览器的地址栏将显示这个网址
+//     事件:
+//        1. popstate事件
+//           历史记录发生改变时触发
+//           调用history.pushState()或history.replaceState()不会触发popstate事件
+//        2. hashchange事件
+//           当页面的hash值改变时触发 常用于构建单页面应用
+
+// Worker
+//     用法:
+//        var worker = new Worker('worker.js');
+//        worker文件必须和主文件满足同源策略
+//     worker和主线程之间的通信
+//        1. postMessage(n)方法
+//        2. onmessage事件
+//     结束一个worker
+//        close()在worker作用域中调用(worker.js 自己辞职)
+//        terminate()在worker对象上调用(主进程的worker对象上 worker.terminate 被炒鱿鱼)
+//        推荐使用terminate();
+//     其他特性
+//        1. inportScripts('./math1.js', './math2.js')
+//           worker只是window的子集 只能实现部分功能 不能获取window, document
+//           所以这里不要引用jquery zepto 可以引入一些计算类的库
+//        2. 作用域globalWorkerScope
+//           可以继续生成worker对象(暂时还不支持)
+//           navigator
+//           XMLHttpRequest
+//           setTimeout/setInterval
+
+// 地理位置
+// geolocation
+//     window.navigator.geolocation
+//        1. getCurrentPosition(s, e, p)  获取当前的位置信息
+//           success回调(必须) error回调 options参数 chrome浏览器需要翻墙
+//           Geoposition对象
+//             latitude纬度 longitude经度 altitude海拔 accuracy定位精准度(单位m)
+//             altitudeAccuracy海拔精准度(单位m) heading方向 speed速度
+//           PositionError对象
+//             用户拒绝 code = 1
+//             获取不到 code = 2
+//             连接超时 code = 3
+//           配置参数
+//             enableHighAccuracy 是否需要高精度位置 默认false
+//             timeout 单位ms 请求超时时间 默认infinity
+//             maximumAge 单位ms 位置信息过期时间 设置为0就无条件获取新的地理位置信息 默认0
+//        2. watchPosition()  监视位置变化 和1参数相同
+//           var id = geolocation.watchPosition() 用于注册监听器 在设备的地理位置发生改变的时候自动被调用
+//           参数与getCurrentPosition相同
+//        3. clearWatch()  清除位置监视
+//           clearWatch(id)
+// devicemotion事件
+//     1. accelerationIncludingGravity 重力加速度(包括重心引力)
+//     2. acceleration 重力加速度(需要陀螺仪支持)
+//     3. rotationRate(alpha, beta, gamma) 旋转速率
+//     4. interval 获取的时间间隔
+//     均为只读属性
+// deviceorientation事件
+//     监听设备在方向上的变化
+//        window.addEventListener('deviceorientation', function (event) { console.log(event); })
+//     属性
+//        1. alpha 设备沿Z轴上的旋转角度 范围为0~360°
+//        2. beta 设备沿X轴上的旋转角度 范围为-180°~180°
+//        3. gamma 设备沿Y轴上的旋转角度 范围为-90°~90°
+//        4. webkitCompassHeading: 与正北方向的角度差值 正北为0度
+//           正东为90度 正南为180度 正西为270度
+//           因为0度是正北 所以叫指北针
+//        5. webkitCompassAccuracy: 指北针的精确度 表示偏差为正负多少度 一般为10
+
+// 视频&音频
+//     <audio src="./hello.mp3"></audio>
+//     <video src="./hello.mp4"></video>
+//     属性
+//        1. autoplay 自动播放
+//        2. controls 设置控件
+//        3. preload(none/metadata/auto) 预加载
+//           none 不需要加载数据
+//           metadata 元数据 诸如时长、比特率、帧大小这样的原数据而不是媒体内容需要加载的
+//           auto 浏览器加载它认为适量的媒体内容
+//        4. loop 循环播放音频/视频
+//        5. poster(video独有)
+//           使用一张图片当做视频的封面
+//     多类型资源
+//        <audio id="music">  
+//             <source src="hello.mp3" type="audio/mpeg">
+//             <source src="hello.ogg" type='audio/ogg"'>
+//        </audio>
+//     脚本化
+//        var audio = document.getElementById('audio');
+//        var audio = new Audio('./hello.mp3'); // video没有对应的构造函数
+//        var audio = document.createElement('audio');
+//     设置属性
+//        controls/loop/preload/autoplay属性
+//        currentSrc资源链接 媒体数据的url地址
+//        注: window.onload
+//     方法
+//        1. play()
+//        2. pause()
+//        3. load()
+//        重新加载视频/音频元素 用于在更改来源或其他设置后对音频/视频元素进行更新
+//     音量volume属性
+//        表示播放音量 介于0(静音)~1(最大音量)之间 默认1 
+//        将muted属性设置为true则会进入静音模式 设置为false则会恢复之前指定的音量继续播放
+//        超过范围会报错[0, 1]
+//     播放速率 playbackRate
+//        用于指定媒体播放的速度 该属性值为1.0表示正常速度 大于1则表示快进 0~1之间表示慢放 负值表示回放
+//        每个浏览器实现的会有差别，具体看浏览器实现 负值基本没实现
+//     currentTime/duration属性
+//        currentTime 设置或返回音频/视频播放的当前位置
+//        duration 返回当前音频/视频的时长(window.onload) 单位秒
+//     played/buffered/seekable
+//        1. played属性 返回已经播放(看过)的时间段
+//        2. buffered属性 返回当前已经缓冲的时间段
+//        3. seekable属性 返回用户可以跳转的时间段
+//        注: 这三个属性都是TimeRanges对象
+//            每个对象都有一个length属性以及start()和end()方法
+//            length属性表示当前的一个时间段
+//            start()与end()分别返回当前时间段的起始时间点和结束时间点(单位是秒，起始参数是0)
+//     paused/seeking/ended属性 查询媒体播放状态
+//        paused为true表示播放器暂停
+//        seeking为true表示播放器正在调到一个新的播放点 (还有seeking事件)
+//        播放器播放完媒体并且停下来，则ended属性为true
+//        注: 后两个作为了解
+//     canPlayType()
+//     常用事件
+//        play 开始播放触发
+//        pause 暂停触发
+//        loadedmetadata 浏览器获取完媒体的元数据触发
+//        loadeddata 浏览器已经加载完当前帧数据 准备播放时触发 注意兼容IE8
+//        ended 当前播放结束后触发
+//     状态属性
+//        readyState属性音频的当前就绪状态
+//        networkState 属性返回音频的当前网络状态
+//        error 事件在音频/视频(audio/video)加载发生错误时触发
+
+// drag&drop
+// 常用于各种拖动操作中
+// 创建可拖动元素
+//     <div id="drag" draggable="true"></div>
+// 拖拽相关事件
+//     1. dragstart 被拖拽元素 开始被拖拽时触发 e.dataTransfer.setData("data",e.target.id)
+//     2. dragend 被拖拽元素 拖拽完成时
+//     3. dragenter 目标元素 拖曳元素进入目标元素
+//     4. dragover 目标元素 拖拽元素在目标元素上移动 会频繁触发
+//     5. drop 目标元素 被拖拽的元素在目标元素上同时鼠标放开触发的事件 e.dataTransfer.getData("data")
+//        需要阻止dragover的默认行为才会触发drop事件
+// DragEvent事件对象
+//     1. 传值 e.dataTransfer.setData("data", e.target.id);
+//     2. 取值 e.dataTransfer.getData("data");
+// eg: 使用拖拽上传文件
+// 
+// FileReader 用于读取文件
+// 方法
+//     1. abort() 终止读取
+//     2. readAsBinaryString(file) 将文件读取为二进制编码
+//     3. readAsDataURL(file) 将文件读取为DataURL编码
+//     4. readAsText(file, [encoding]) 将文件读取为文本
+//     5. readAsArrayBuffer(file)​​​​​​​ 将文件读取为arraybuffer
+//        通过不同的方式读取文件
+// 事件
+//     1. onloadstart 读取开始时触发
+//     2. onprogress 读取中
+//     3. onloadend 读取完成触发，无论成功或失败
+//     4. onload 文件读取成功完成时触发
+//     5. onabort 中断时触发
+//     6. onerror 出错时触发
+// 获取读取的结果
+//     fr.onload = function () { this.result; };
+// 
+// WebSocket
+// 该对象提供了一组 API 用于创建和管理 WebSocket 连接 以及通过连接发送和接收数据
+// 它其实是一个新协议 跟HTTP协议基本没有关系 只是为了兼容现有浏览器的握手规范而已 借用了HTTP的协议来完成握手
+// 产生原因
+//     1. 在 HTTP/1.0 中,大多实现为每个请求/响应交换使用新的连接
+//     2. 在 HTTP/1.1 中,一个连接可用于一次或多次请求/响应交换
+//     3. HTTP协议中 服务端不能主动联系客户端 只能有客户端发起
+//     4. webSoket服务器和客户端均可主动发送数据
+// 创建webSocket
+//     var Socket = new WebSocket(url);
+// WebSocket方法
+//     1. Socket.send();
+//        send(data)方法使用连接传输数据
+//     2. Socket.close();
+//        close()方法用于终止任何现有连接
+// 事件
+//     1. open 建立socket连接时触发这个事件
+//     2. message 客户端从服务器接收数据时触发
+//     3. error 连接发生错误时触发
+//     4. close 连接被关闭时触发
+// 测试WebSocket的服务器 ws://echo.websocket.org
+// 优点
+//     1. 客户端与服务器都可以主动传送数据给对方(双向通信)
+//     2. 不用频率创建TCP请求及销毁请求 减少网络带宽资源的占用 同时也节省服务器资源
+    </script>
+</body>
+</html>

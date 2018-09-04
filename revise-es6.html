@@ -80,7 +80,8 @@
         // 1 对象的解构赋值 (key: value)
         // 特点: 属性名key对应
         // 实质: 模式匹配
-        // 规则: key加上冒号 key: 
+        // 模式是“key:”, 模式不是变量, 所以不会被赋值
+        // 变量是“value”, 变量会被赋值
         // 完全解构
         // let obj = {a: 1, b: 2, c: 3}
         // let {a, b, c} = obj
@@ -140,6 +141,49 @@
         // Set
         // 特点: 有序列表  包含相互独立且不相等的值
         // let set = new Set([1, 1, 2, 3, 3, '1'])
+        // 
+        // 
+        // ES6 String & Array
+        // 
+        // String
+        // includes 与indexOf相似  返回值为 true / false
+        // startsWidth  endsWidth  前后缀比较
+        // repeat
+        // 
+        // 模板字符串  可嵌套使用
+        // 优点
+        // 1更标准的字符串 更好的处理字符串拼接问题
+        // 2语义化更好
+        // 3防止注入 XSS
+        // let str = `${name} doing ${sth}`
+        // {}中的内容不是字符串都会隐式调用对象的toString()方法
+        // 模板中可以写表达式  函数
+        // eg: let multi = `${a}x${b}=${a*b}`
+        // 
+        // 标签模板  标签 => 函数
+        // alert('hello')  alert`hello`
+        // 按照模板分开
+        // function print(arg1, arg2) {
+        //     console.log(arguments)
+        // }
+        // print`12${3}4${5}6`
+        // arguments = ['12', '4', '6'], 3, 5
+        // 
+        // ES6 Array
+        // Array.of()  加强的Array构造函数  
+        // 统一返回由参数构成的数组
+        // Array.from(classArr) 将类数组转化成数组 arguments domNode
+        // 通过操作数组的方法操作类数组
+        // ES6之前 Array.prototype.filter.call(classArr)
+        // 
+        // ES6之前 Array.prototype.indexOf() 不能查找NaN
+        // find(fn)  模糊查找  找到立即直接返回该值 不再往下查找
+        // findIndex(fn)  精确查找  找到立即直接返回该值的索引 不再往下查找
+        // 
+        // 初始化填充数据
+        // fill(value, start=0, end=length)
+
+
     </script>
 </body>
 </html>

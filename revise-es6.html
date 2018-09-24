@@ -182,8 +182,69 @@
         // 
         // 初始化填充数据
         // fill(value, start=0, end=length)
-
-
+        // 
+        // 
+        // 迭代器(遍历器)Iterator  生成器
+        // 
+        // 
+        // Promise
+        // 使用方法
+        // const p = new Promise(function (resolve, reject) {
+            // if(/* 异步操作成功 */) {
+            //     resolve(value)
+            // } else {
+            //     reject(error)
+            // }
+        // })
+        // p.then(function (value) {}, function (error) {})
+        // 注：调用resolve或reject不会终结Promise的参数函数的执行
+        // 
+        // Promise实例方法 -- then
+        // new Promise(function () {}).then(resolvedFn, rejectedFn)
+        // then的第一个参数是resolved状态的回调函数，第二个参数（可选）是rejected状态的回调函数
+        // then方法返回的是一个新的Promise实例，因此可以采用链式写法，then后再调用then
+        // 
+        // Promise实例方法 -- catch
+        // 相当于.then(null, rejection);  @param {Function} rejection
+        // catch方法的作用，等同于抛出异常
+        // 一般来说，不要再then中定义reject状态的函数（即then的第二个参数），总是使用catch方法
+        // 理由是catch方法可以捕获前面所有的then方法执行中的错误，也更接近同步写法（try/catch）
+        // catch返回的还是Promise对象，所以可以继续调用then
+        // 
+        // Promise内部的错误不会影响到Promise外部的代码，即内部报错，外部还会继续执行
+        // 通俗说法：Promise会吃掉错误
+        // eg: var p = new Promise(function (resolve, reject) { 
+        //         // x is not defined
+        //         resolve(x + 1)
+        //     })
+        //     p.then(value => console.log(value));
+        //     setTimeout(() => console.log(112), 2000)  该代码会继续执行
+        // 
+        // Promise实例方法 -- finally
+        // finally方法中的操作，是与状态无关，不依赖于Promise的执行结果
+        // 
+        // Promise方法 -- all
+        // Promise.all([p1, p2, p3, ...])
+        // all方法用于将多个Promise实例包装成一个新的Promise实例
+        // 参数数组中所有的实例的状态都变成fulfilled  新实例的状态才会变成fulfilled
+        // 参数数组中所有的实例之中有一个被rejected  新实例的状态就会变成rejected
+        // 
+        // Promise方法 -- race
+        // var p = Promise.race([p1, p2, p3, ...])
+        // race方法同样是将多个Promise实例包装成一个新的Promise实例
+        // 参数数组中所有的实例之中有一个率先改变状态  新实例的状态就会跟着改变
+        // 率先改变状态的Promise实例的返回值就会传递给p的回调函数
+        // 
+        // Promise方法 -- resolve
+        // Promise.resolve('foo') === new Promise(resolve => resolve('foo'))
+        // 
+        // Promise方法 -- reject
+        // Promise.resolve('err') === new Promise((resolve, reject) => reject('err'))
+        // 
+        // Promise方法 -- try
+        // 可以让同步函数同步执行  异步函数异步执行
+        // 为所有操作提供了统一的处理机制  想用then方法管理流程
+        // 类似于try {} catch {} 中的try
     </script>
 </body>
 </html>

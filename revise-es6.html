@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>ECMAScript 6(ECMAScript 2015)</title>
 </head>
 <body>
     <script>
@@ -35,6 +35,9 @@
         //     在参数的值绝对等于undefined时才会计算默认值表达式的值
         //     参数默认值是惰性求值的
         // eg: function demo(x = y, y) {}    存在TDZ
+        // 2、定义静态方法 static
+        // eg: function fn() { static fn1() {...} }
+        // 相当于 fn.fn1 = function () {...}
         // 
         // 
         // 对象的扩展
@@ -200,9 +203,13 @@
         // 注：调用resolve或reject不会终结Promise的参数函数的执行
         // 
         // Promise实例方法 -- then
-        // new Promise(function () {}).then(resolvedFn, rejectedFn)
+        // new Promise(function (resolve, reject) {}).then(resolvedFn, rejectedFn)
         // then的第一个参数是resolved状态的回调函数，第二个参数（可选）是rejected状态的回调函数
         // then方法返回的是一个新的Promise实例，因此可以采用链式写法，then后再调用then
+        // 当then中的resolvedFn或者rejectedFn函数执行时显式返回新的Promise对象时
+        //   即return new Promise(function (resolve, reject) {})下一个then则监听返回新的Promise对象的状态
+        // 当then中的resolvedFn或者rejectedFn函数执行时隐式返回新的Promise对象时
+        //   即不写return或return的不是Promise对象 相当于执行Promise.resolve(data) 下一个then默认执行resolve的回调函数
         // 
         // Promise实例方法 -- catch
         // 相当于.then(null, rejection);  @param {Function} rejection
@@ -237,9 +244,11 @@
         // 
         // Promise方法 -- resolve
         // Promise.resolve('foo') === new Promise(resolve => resolve('foo'))
+        // 该Promise实例对象的状态就为resolved
         // 
         // Promise方法 -- reject
         // Promise.resolve('err') === new Promise((resolve, reject) => reject('err'))
+        // 该Promise实例对象的状态就为resolved
         // 
         // Promise方法 -- try
         // 可以让同步函数同步执行  异步函数异步执行

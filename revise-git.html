@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // git的下载与安装
+        // git的第一个指令
+        // 初始化本地仓库git init
+        // 本地环境配置与秘钥SSH配置
+        // 秘钥SSH获取 ssh-keygen  .pub文件
+        // 本地环境配置
+        //   git config --global user.name 'xxx'
+        //   git config --global user.email 'xxx@xx.com'
+        // 查看本地git配置 git config --list
+        // 
+        // 远程仓库
+        // 在github或gitee创建好仓库后
+        // 本地分支与远程分支建立关联
+        //   1、查看远程仓库
+        //      git remote -v
+        //   2、添加源仓库地址为远程仓库
+        //      git remote add <name> <remote>
+        //      <name>: 默认为origin
+        //      <remote>: 远程仓库地址
+        //   3、远程仓库重命名
+        //      git remote rename oldName newName
+        // 
+        // 基础工作流
+        //   1、克隆仓库
+        //      git clone <repository>
+        //   2、查看当前文件状态
+        //      git status
+        //   3、提交文件得到暂存区
+        //      git add <pathspec>
+        //      git add .  提交所有未暂存文件
+        //   4、提交到本地仓库
+        //      git commit -m "this is msg"
+        //   5、提交内容到远程仓库
+        //      git push <origin> <lBranch>:<rBranch>
+        //      <origin>: 远程仓库名称，默认为origin
+        //      <lBranch>: 本地分支名
+        //      <rBranch>: 远程分支名
+        //      本地分支名与远程分支名相同则可简写，如
+        //          git push origin master
+        //   6、查看分支
+        //      git branch
+        //   7、创建新分支
+        //      git branch <name>
+        //   8、切换分支
+        //      git checkout <name>
+        //   9、创建并切换分支
+        //      git checkout -b <name>
+        //   10、删除本地分支
+        //      git branch -d <name>
+        //   11、删除远程分支
+        //      git push -d <origin> <branch>
+        // 
+        // 分支合并&处理冲突
+        //   1、无冲突合并
+        //      git merge <branch>
+        //   2、冲突合并
+        //      git merge <branch>
+        //      解决冲突
+        //      git add .
+        //      git commit -m ""
+        //      git push origin master
+        // 
+        // 文件储藏
+        //   1、添加改动到stash(储藏)
+        //      git stash save -a "msg"
+        //   2、查看stash列表
+        //      git stash list
+        //   3、恢复改动(弹出储藏)
+        //      git stash pop <stash@{id}>
+        //   4、删除储藏
+        //      git stash drop <stash@{id}>
+        //   5、删除全部储藏
+        //      git stash clear
+        // 
+        // 本地版本库回退
+        //   1、撤销工作区修改
+        //      git checkout -- <file>
+        //   2、暂存区文件撤销(不覆盖工作区)
+        //      git reset HEAD <file>
+        //   3、版本回退
+        //      git reset --sort|mixed|hard <HEAD~num>|<commit id>
+        //      sort回退至之前版本的暂存状态
+        //      mixed回退至之前版本的未暂存状态
+        //      hard回退至之前版本(未修改)
+        //      <HEAD~num>: 
+        //      <commit id>: 提交的版本号
+        // 
+        // 代码差异比较
+        //   1、工作区与暂存区
+        //      git diff
+        //   2、工作区与本地仓库中最近的一次commit的内容
+        //      git diff HEAD
+        //   3、暂存区与本地仓库中最近的一次commit的内容
+        //      git diff --cached
+        //   4、两个commit之间
+        //      git diff <commit id> <commit id>
+        // 
+        // 状态查询
+        //   1、查看状态
+        //      git status
+        //   2、查看日志
+        //      git log <fileName>
+        //      <fileName>为空时查看全部日志
+        //   3、查看历史操作记录
+        //      git reflog
+
+        // HEXO
+    </script>
+</body>
+</html>

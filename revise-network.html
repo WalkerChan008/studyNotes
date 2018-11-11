@@ -147,6 +147,31 @@
         //     使用场景：实时搜索(keyup) 调整窗口(resize)
         // 函数节流：预定一个函数只有在大于等于执行周期时才执行 周期内调用不执行
         //     使用场景：页面滚动(scroll) 抢购疯狂点击(mousedown) 拖拽(mousemove)
+        // 
+        // function throttle(handler, wait) {  //handler是要进行节流的函数，wait是等待时间
+        //     var lastTime = 0;
+        //     return function () {
+        //         var nowTime = new Date().getTime();    //获取当前时间
+        //         if(nowTime - lastTime > wait){
+        //             handler.apply(this, arguments);
+        //             lastTime = nowTime;      //更新最后时间
+        //         }
+        //     }
+        // }
+        // 
+        // function debunce(handler, delay) { 
+        //     // handler是要传入的进行防抖的函数，delay是等待时间。
+        //     var timer = null;
+        //     return function () {
+        //         var _self = this, args = arguments; 
+        //         clearTimeout(timer);        //每次都要清除这个定时器 
+        //         timer = setTimeout(function () {    //重新开启定时器 
+        //             handler.apply(_self, args); 
+        //         }, delay); 
+        //     } 
+        // }
+
+
 
 
     </script>

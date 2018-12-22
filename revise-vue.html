@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue</title>
+    <!-- <script src="E:/frontEnd/filesOfFE/duyi_advance/data/vue/src/vue.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+</head>
+
+<body>
+
+    <!-- (v-bind:class & style) start -->
+    <style>
+        .color-gray {
+            color: #ccc;
+        }
+
+        .font-32 {
+            font-size: 32px;
+        }
+    </style>
+
+    <div id="app">
+        <span :class="classObj">v-bind: classObj</span>
+        <br>
+        <span :class="classArr">v-bind: classArr</span>
+        <br>
+        <span :style="styleObj">v-bind: styleObj</span>
+        <br>
+        <span :style="styleArr">v-bind: styleArr</span>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                classObj: {
+                    'color-gray': true,
+                    'font-32': true
+                },
+                classArr: ['color-gray', 'font-32'],
+                styleObj: {
+                    color: '#ccc',
+                    fontSize: '32px'
+                },
+                styleArr: [{
+                    color: '#ccc'
+                }, {
+                    fontSize: '32px'
+                }]
+            }
+        })
+    </script>
+    <!-- (v-bind:class & style) end -->
+
+    <script name="vue-base">
+        // 渐进式框架
+        // vue(core) + vuex(状态管理) + vue-router(SPA)
+        // 需要使用到 webpack vue-cli
+        // vue => component  声明式
+        // 声明式  注重结果  for(var i = 0; i < arr.length; i++)
+        // 命令式  注重过程  arr.map()
+        // 
+        // 组件 = 数据(包括对数据的操作) + 指令
+        // 
+        // v-bind:class="{ red: true, font: false }"
+        // v-bind:class="[red, font]"    data: { red: 'red', font: 'font'}
+        // 
+        // v-bind:style="styleObj"  styleObj = {width: '10px', height: '10px', color: 'red'}
+        // v-bind:style="[styleObj1, styleObj2]"
+        // 
+        // new Vue(...config)
+        // config = {
+        //     el,
+        //     data,
+        //     props,
+        //     methods,
+        //     computed,
+        //     watch,
+        //     components,
+        //     template,
+        //     ...lifecycle
+        // }
+    </script>
+
+    <script name="vuex">
+        // vuex
+        // 安装  通过npm安装vuex
+        // 使用
+        //    Vue.use(vuex)
+        //    var store = new Vuex.store({
+        //         state,
+        //         mutations,
+        //         actions,
+        //         getters,
+        //         modules,
+        //    })
+        // 
+        //    new Vue({
+        //         store,
+        //         mounted () {
+        //             this.store.state
+        //             this.store.commit('fn', payload)   // mutations
+        //             this.store.dispatch('fnAsync', payload)   // actions
+        //         },
+        //    })
+        // 
+        // 辅助函数
+        //    mapState
+        //    mapMutations
+        //    mapActions
+        //    mapGetters
+    </script>
+
+    <script name="vue-ele-project">
+        // 目标：
+        // 掌握vuejs项目在实战中的应用
+        // 学会使用vuejs
+        // 组件化、模块化的开发方式
+
+        // 知识内容：
+        // vue-cli
+        // axios  ajax通信  vue-resource  推荐axios
+        // webpack  构建工具
+        // mockjs  模拟数据
+        // es6  ealint代码风格检查工具
+
+        // 学到什么：
+        // 标准开发流程，做事的方式  （主要）
+        // 工程化、组件化、模块化的思想  （主要）
+        // 移动端开发的一些小技巧
+        // flex弹性布局
+        // 交互设计
+
+        // 如何做技术选型：
+        // 多方面因素
+        // 技术方面：
+        //     社区活跃程度  开源框架的其他方面（文档 轻重量级）
+        // 人才方面：
+        //     上手成本
+        //     团队技术积累
+
+        // vue 核心思想
+        // 数据驱动
+        // 组件化
+
+        // 如何在公司中，开发一个项目
+        // 产品产出需求文档，产品原型
+        // ==》阅读文档，梳理需求
+        // ==》评审需求
+        // ==》拿到UI图和交互设计稿
+        // ==》开始做详细设计（拆分需求模块，技术选型，调研技术方案中的不确定）
+        // ==》详细设计评审
+        // ==》出项目排期
+        // ==》进入开发
+        // ==》搭建项目框架
+        // ==》模拟Mock数据
+        // ==》实现页面
+        // ==》自测
+        // ==》联调
+        // ==》过冒烟case
+        // ==》提交测试代码，部署测试环境，测试人员介入测试
+        // ==》改bug
+        // ==》部署上线
+        // ==》验证
+
+        // vue-cli
+        // 脚手架
+        
+        // 帮你减少 为减少重复性工作而做的重复性工作 的工具
+
+        // eg：项目0  gulp build脚本，是为了减少重复性工作
+        //     项目1 项目2 …… 也要执行gulp build
+        // 这样写gulp脚本也成为了重复性工作
+
+        // charles fiddler调试工具
+    </script>
+</body>
+
+</html>

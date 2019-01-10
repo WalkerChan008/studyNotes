@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>database</title>
+</head>
+<body>
+    <script>
+        /* 
+        MySQL基础命令
+            show databases; 显示数据库系统中所有的数据库
+            use DBName; 进入某个数据库 DBName数据库名称
+            show tables; 显示数据库中所有的表
+            desc tName; 显示表中的字段 tName表名
+            show create table tName; 表的创建语句 tName表名
+            select * from tName; 查看表中所有的数据 tName表名
+            create database DBName; 创建数据库 DBName数据库名
+        */
+
+
+        /* 
+        数据库常用字段类型
+            1.整数 int
+            2.长整数 bigint(21) 一般写21
+            3.浮点数 float
+            4.双精度浮点数 double
+            5.字符串 varchar(16)
+            6.文本 text
+        */
+        // 有实际意义或逻辑不能做主键
+
+
+        /* 
+        命令行修改库、表、字段编码集
+            库 alter database DBName character set utf8;  DBName库名 utf8字符集
+            表 alter table tName default character set utf8; tName表名 utf8字符集
+            字段 alter table tName convert to character set utf8; tName表名 utf8字符集
+
+            图形界面设置 utf-8   utf-8 general_ci
+        */
+
+        /* 
+        数据的增删改查
+            增
+            insert into tName (`field1`, `field2`, ...) values (1, "test", ...),(2, "tset", ...),...;
+                tName表名
+            删
+            delete from tName (where field = data);
+            改
+            update tName set field1 = data1, field2 = data2 where field3 = data3 and/or field4 = data4;
+                tName表名 field1设置的字段 data1设置的数据 修改多个以逗号隔开
+            查
+            select field1, field2, ... from tName where field3 = data3;
+                *查询所有,在公司不建议用  field1,field2查询指定的列
+            select count(1) from tName where field = data; 求总数
+            select sum(field) from tName;  求总和
+            select avg(field) as alias from tName;  求平均数 as添加别名
+            select field, count(1) from tName group by field;  前后两个field必须相同
+            select * from tName limit offset, num;  offset偏移量  num每页数量
+            select * from tName order by field (desc);  有desc为倒序
+        */
+    </script>
+</body>
+</html>

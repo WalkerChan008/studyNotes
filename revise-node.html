@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>nodejs in linux</title>
+</head>
+<body>
+    <script title="linux安装node">
+        // 1、安装wget
+        //      yum install -y wget
+        // 2、下载nodejs linux版本
+        //      wget nodejs官网上linux版本的地址
+        // 3、解压缩文件
+        //      xz -d 压缩包名称
+        //      tar -xf 压缩包名称
+        // 4、将node命令和npm命令生成快捷方式
+        //      ln -s ~/node-v10.15.0-linux-x64/bin/node /usr/bin/node
+        //      ln -s ~/node-v10.15.0-linux-x64/bin/npm /usr/bin/npm
+        // 至此，node和npm在linux命令行下可使用
+    </script>
+
+    <script title="NodeJs起步">
+        /* 目录
+        第一部分：
+        后端的规范与思想
+        第二部分：
+        基础的API
+        第三部分：
+        常用的框架
+        第四部分：（Web项目）
+        1.接收Web请求
+        2.处理业务逻辑
+        3.文件操作
+        4.数据库（关系型数据库Mysql，非MongoDB）
+        5.反向代理服务器（ip哈希，轮询）
+            ①轮询：第一个请求发到第一个服务器，第二个发到第二...
+        第五部分：
+        大项目
+        */
+
+        /*
+        一、后端的规范与思想
+        1、分层
+         1）web层（接收和发送http请求，封装；web层，controller层）
+         2）业务逻辑层（服务层，XXXService）
+            LoginController（接收参数，判断是否非法，传给服务层）
+            LoginService（获取这个用户的密码，进行比较）
+         3）DAO层
+            DataBase（DB）：存数据
+            业务：对对象进行操作
+            如果要存储：对象 转为 数据
+            如果要读取：数据 转为 对象
+         4）持久层：存在磁盘上
+            文件，数据库
+         
+         每层的命名：
+          web层：LoginController（接收参数，判断是否非法，传给服务层）
+          服务层：LoginService（获取这个用户的密码，进行比较）
+          DAO层：LoginDAO（从数据库获取数据，并转换为对象）
+          domain：User
+
+         设计模式：单一职责原则
+
+         文件夹目录
+          web、service、dao、domain、util
+
+
+        2、模块化
+         1）ES6导入导出，ES3、5缺少模块化概念
+         2）JS规范缺乏管理机制（引用插件版本、地址不统一等）
+          NPM npm install
+
+         require,module.exports,exports
+         module.exports和exports有什么区别？
+         初始化时，module.exports和exports指向的是同一地址
+         exports = a;
+         module.exports = b;
+         js文件导出的永远是对象module.exports
+         全用module.exports导出
+
+         -------  important start  -------
+
+            NodeJs的模块(nodejs代码)是运行在一个函数当中
+            console.log(arguments);
+            console.log(arguments[0] === exports);
+            console.log(arguments[1] === require);
+            ...
+
+            function fn(exports, require, module, __filename, __dirname) {
+
+                -----
+                中间的内容是我们写的nodejs代码
+                -----
+
+                return module.exports;
+            }
+
+         -------   important end   -------
+
+        
+        二、nodejs API
+        1、net模块
+         1) var net = require('net');
+         2) Server
+            var server = net.createServer();
+            事件：
+            listening
+            connection
+            close
+            error
+
+            方法：
+            listen(portNum, ipStr)
+            close
+            address
+
+         3) Client
+            var socket = net.connect(portNum, ipStr);
+            事件：
+            connect
+            data
+            end
+            timeout
+            error
+            close
+
+            属性：
+            remoteAddress
+            remotePort
+            localAddress
+            localPort
+
+            方法：
+            setTimeout(num)
+            write(str)
+            setEncoding
+            end
+
+        2、fs文件系统模块
+            同步读取文件
+            var conf = fs.readFileSync(filePath);
+            readFile writeFile writeFileAync appendFile appendFileSync
+        
+        3、http模块
+            http.createServer(function (req, res) {
+
+            }).listen(port);
+
+        4、url模块
+            url字符串转换成对象
+            url.parse(url, transferToObj);
+        */
+    </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>koa</title>
+</head>
+<body>
+    <script>
+        /** koa
+         * const Koa = require('koa');  导入的是一个class
+         * const app = new Koa();
+         * const port_num = 11123;
+         * app.use(async (ctx, next) => {
+         *     ...
+         *     await next();
+         *     ...
+         * });
+         * app.listen(port_num);
+         * console.log(`app started at port ${port_num}`);
+         * 
+         */
+
+        /** eg:
+         * app.use(async (ctx, next) => {
+         *        console.log('1-1');
+         *        await next();
+         *        console.log('1-2');
+         * });
+         * 
+         * app.use(async (ctx, next) => {
+         *        console.log('2-1');
+         *        await next();
+         *        console.log('2-2');
+         * });
+         * 
+         * app.use(async (ctx, next) => {
+         *        console.log('3-1');
+         *        await next();
+         *        console.log('3-2');
+         * });
+         * 
+         * result: 1-1   2-1   3-1   3-2   2-2   1-2
+         */
+
+        /** 可以对ctx进行操作并设置返回内容，为什么还要调用await next()？
+         * 原因：koa把很多个async函数组成一个处理链
+         *       每个async函数都可以做一些自己的事情
+         *       然后用await next()来调用写一个async函数
+         *       每个async函数称为middleware(中间件)
+         *       这些middleware组合起来可以完成很多有用的功能
+         * 
+         * 调用app.use()的顺序决定了middleware的顺序
+         * 如果middleware没有调用await next() 后续的middleware不再执行
+         */
+
+        /** 
+         * 对比Connect实现，通过一系列功能直接传递控制，直到一个返回
+         * Koa调用“下游”，然后控制流回“上游”
+         */
+
+        /** koa-router
+         * const router = require('koa-router') 返回的是函数
+         * router.get('/hello/:name', async (ctx, next) => {
+         *     let name = ctx.params.name;
+         *     ctx.response.body = `<h1>Hello, ${name}!</h1>`;
+         * });
+         * 
+         * app.use(router.routes);
+         */
+
+        /** koa-bodyparser
+         * 该middleware必须在router之前被注册到app对象上
+         * const bodyParser = require('koa-bodyparser');
+         * app.use(bodyParser());
+         */
+    </script>
+</body>
+</html>

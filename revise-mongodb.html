@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // linux下安装MongoDB
+        //  下载安装包
+        //    wget MongoDB下载路径
+        //  解压MongoDB
+        //    tar zxvf 压缩包名称
+        //  将mongodb移动到/usr/local/mongodb下
+        //    mv 解压的文件夹 /usr/local/mongodb
+        //  创建数据库路径
+        //    mkdir -p /home/mongodb/
+        //  创建日志路径
+        //    mkdir -p /home/mongolog/
+        //    cd /home/mongolog
+        //    vi mongodb.log
+        //  启动mongodb
+        //    ./bin/mongod --dbpath /home/mongodb/ --logpath /home/mongolog/mongodb.log --fork --port 27017
+        //      --fork 后台运行
+        //  查询进程
+        //    ps aux |grep 'mongo'
+        // 
+        // MongoDB基本指令
+        //  show dbs;  查看数据库
+        //  use <database>; 切换至某个数据库(没有就创建)
+        //  db.getName(); 查看当前数据库名
+        //  show collections; 查看当前数据库的集合
+        //  db.createCollection('集合名'); 创建一个集合
+        //  db.集合名.save({key: val, ...}); 增
+        //  查
+        //    db.集合名.find(); 查所有
+        //    db.集合名.find({key: val}); 条件精确查询
+        //    db.集合名.find({key: 表达式}); 条件模糊查询
+        //      {key: {$gt: val}} 大于
+        //      {key: {$gte: val}} 大于等于
+        //      {key: {$lt: val}} 小于
+        //      {key: {$lte: val}} 小于等于
+        //    db.集合名.distinct(key); 去重查询
+        //    db.集合名.find({$and:[{key1: val1}, {key2: val2}, ...]}); 且查询
+        //    db.集合名.find({$or:[{key1: val1}, {key2: val2}, ...]}); 或查询
+        //    db.集合名.find({key: {$gt: val1, $lt: val2}});  相当于between
+        //      --select * from table_name where age between 16 and 20;
+        //    db.集合名.find().limit(数量); 限制查询数量
+        //    db.集合名.find().skip(数量).limit(数量); 跳过几个查几个
+        //    db.集合名.find().count(); 查询条数
+        //  删
+        //    db.集合名.remove({key: val});
+        //  改
+        //    db.集合名.update({key1: val1}, {$set: {key2: val2}, bl1, bl2});
+        //      {key1: val1} 查询条件
+        //      {key2: val2} 要修改的值
+        //      bl1: 布尔值 upsert: true找得到修改 找不到新增
+        //      bl2: 布尔值 multi: true是否修改多个
+        // 
+        // nodeJs连接MongoDB
+        //  
+    </script>
+</body>
+</html>

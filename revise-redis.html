@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 为什么要使用缓存(Redis)
+        // 由于硬盘速度读写速度太慢 导致数据库性能有瓶颈
+        // 
+        // 帮助DB拦截请求
+        //  1、什么样的数存进缓存
+        //  2、防止缓存穿透(布隆算法)
+        // 
+        // 缓存使用的是内存：
+        // Redis即使用内存 也使用硬盘(用于数据备份)
+        // 
+        // windows下Redis的安装
+        // 安装-修改配置文件 redis.windows-service.conf文件
+        // 设置密码
+        //  requirepass pwd
+        // 取消限制本地访问
+        //  bind 127.0.0.1 此行代码注释
+        // 
+        // linux下Redis的安装
+        // yum install wget
+        // 安装C语言环境
+        //  yum install gcc
+        //  make MALLOC=libc
+        // 解压redis压缩包及进入文件夹
+        //  wget http://download.redis.io/releases/redis-4.0.2.tar.gz
+        //  tar xzf redis-4.0.2.tar.gz
+        //  cd redis-4.0.2
+        // 安装redis
+        //  make install
+        //  cd /usr/local/bin/
+        // 启动redis
+        //  ./redis-server
+        //  redis-server &    后台启动
+        // 查询是否在运行
+        //  ps aux |grep "redis"
+        // 关闭服务(杀掉进程)
+        //  kill processId   kill指令  processId进程号
+        // 
+        // Redis是使用C语言写的
+        // 需要C语言的编译和执行的环境
+        // linux(安装环境 -> 安装redis)
+        // 
+        // Redis支持的数据结构：
+        //  key-value
+        //  key-map
+        //  key-set
+        //  key-list
+        //    key一般都是字符串, value可以是数字, 可以是字符串
+        //    一旦是字符串, 在C语言里没有字符串的概念
+        //    字符数组封装出来的
+        //    Redis里的字符串长度是可变的
+        //    Redis的字符串数组的数据结构是SDS(Simple Dynamic String)
+        //    String {
+        //      Free:
+        //      Len:
+        //      Data: 字符数组
+        //    }
+        // 
+        // nodeJs操作Redis
+        // 
+        // Redis没有表的概念 集群
+        // 规范
+        //  key加前缀
+        // 
+        // 命令行指令
+        //  set key value  设置值
+        //  get key  获取值
+        //  hset key field value  设置key下的单个field值
+        //  hget key field  获取key下的单个field值
+        //  hgetall key  获取所有key下的值
+        //  hmset key field1 value1 field2 value2 ...  设置key下的多个键值对
+    </script>
+</body>
+</html>

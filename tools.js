@@ -334,6 +334,23 @@ var manageCookie = {
 }
 
 /**
+ * 反转单向链表
+ * @param {Object} head - 链表顶部对象
+ */
+function reverseLinkedList(head) {
+	let curNode = head,
+  		pPre = null,
+      pNext;
+  while(curNode) {
+  	pNext = curNode.next;
+  	curNode.next = pPre;
+    pPre = curNode;
+    curNode = pNext;
+  }
+  return pPre;
+}
+
+/**
  * 防抖
  * @param {Function} fn - 需要防抖的函数
  * @param {Number} wait - 防抖时间

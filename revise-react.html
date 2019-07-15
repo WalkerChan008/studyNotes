@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>React</title>
+</head>
+<body>
+    <script>
+        // react   react-dom
+        // 引入的React的名字首字母必须为大写，是因为babel转换
+        // jsx -> React.createElement(type, props, ...childrens) -> vnode元素(描述当前对象) -> 渲染到页面
+        //   let div = <div>test</div>; === React.createElement(type, props, ...childrens);
+        //     type元素属性  props元素上的属性   childrens子元素( React.createElement(type, props, ...childrens) )
+        //   reactDom.render(vnode, container);
+        //     vnode   container容器
+        //     eg: reactDom.render(<div>div</div>, document.getElementById('root'));
+        // 
+        // Fragment
+        //   <React.Fragment></React.Fragment> === <></>
+        // jsx语法解析  { js }  < html >
+        //   遇到花括号，把花括号中的内容当做js来解析
+        //   遇到尖角号，把尖角号中的内容当做html来解析
+        //   花括号中可以渲染数组([<p>J</p>, 2, 3], 会将p元素渲染出来)，但是对象不行
+        //   有返回值也可放入花括号中
+        //     eg: function test () { return 'test' }
+        //         let demo = <div>{ test() }</div>
+        // jsx不能使用js关键字
+        //   class -> className
+    </script>
+</body>
+</html>

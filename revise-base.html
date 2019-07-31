@@ -740,7 +740,7 @@
     // 	    arrStr = '[object Array]';
     // 	    for(var prop in origin) {
     // 	    	if(origin.hasOwnProperty(prop)) {
-    // 	    		if(origin[prop] !== 'null' && typeof(origin[prop]) == 'object') {
+    // 	    		if(origin[prop] !== null && typeof(origin[prop]) == 'object') {
     // 					target[prop] = (toStr.call(origin[prop]) == arrStr) ? [] : {};
     // 	    			deepClone(origin[prop], target[prop]);
 

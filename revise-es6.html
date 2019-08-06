@@ -460,21 +460,32 @@
             }
             static all(promiseArr) {
                 return new myPromise((resolve, reject) => {
-                    let arr = [];
-                    let i = 0;
+                    // let arr = [];
+                    // let i = 0;
 
-                    function processData(index, data) {
-                        arr[index] = data;
-                        i++;
-                        if (i === promiseArr.length) {
-                            resolve(arr);
-                        }
-                    }
-                    for (let i = 0; i < promiseArr.length; i++) {
-                        promiseArr[i].then((data) => {
-                            processData(i, data);
+                    // function processData(index, data) {
+                    //     arr[index] = data;
+                    //     i++;
+                    //     if (i === promiseArr.length) {
+                    //         resolve(arr);
+                    //     }
+                    // }
+                    // for (let i = 0; i < promiseArr.length; i++) {
+                    //     promiseArr[i].then((data) => {
+                    //         processData(i, data);
+                    //     }, reject)
+                    // }
+                    let arr = [],
+                        len = promiseArr.length
+                    
+                    promiseArr.forEach((p, i) => {
+                        p.then(data => {
+                            arr[i] = data
+                            if(i === len - 1) {
+                                resolve(arr)
+                            }
                         }, reject)
-                    }
+                    })
                 })
             }
         }
